@@ -14,7 +14,7 @@ AppDelegate::~AppDelegate()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-    CCSize designResolutionSize = CCSizeMake(1280, 800);
+    CCSize designResolutionSize = CCSizeMake(800, 1280);
     
     CCDirector *pDirector = CCDirector::sharedDirector();
     CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();

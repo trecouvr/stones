@@ -1,6 +1,5 @@
 #include "AreneLayer.h"
 
-#include "CocoCard.h"
 
 AreneLayer::AreneLayer() : CCLayer()
 {
@@ -10,15 +9,16 @@ AreneLayer::AreneLayer() : CCLayer()
     CCLOG("Size = %f %f", size.width, size.height);
     
 
-    // create white background
-    colorLayer = new CCLayerColor;
-    colorLayer->initWithColor( ccc4(0, 0, 255, 255) );
-    addChild(this->colorLayer, 0);
+    // create background
+    color_layer_ = new CCLayerColor;
+    color_layer_->initWithColor(ccc4(0, 0, 255, 255));
+    addChild(color_layer_, 0);
     
-    CocoCard * c = new CocoCard(size.width/2, size.height/2);
+    player_.incrementHp(2000);
     
-    // add the sprite as a child to this layer
-    addChild(c->getSprite(), 1);
+    player_hp_display_.setPosition(ccp(400, 170));
+    addChild(&player_hp_display_, 1);
+    player_hp_display_.update(player_.getHp());
 }
 
 AreneLayer::~AreneLayer()
@@ -47,6 +47,8 @@ void AreneLayer::ccTouchesMoved(CCSet* touches, CCEvent* event)
 void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
     CCLOG("ccTouchEnded");
+    player_.decrementHp(1);
+    player_hp_display_.update(player_.getHp());
 }
 
 

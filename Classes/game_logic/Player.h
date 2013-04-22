@@ -7,7 +7,12 @@ class Player
 {
     public:
         Player(Deck* deck = 0);
-    
+        
+        void decrementHp(int v);
+        void incrementHp(int v);
+        
+        int getHp() const;
+        
     protected:
         int hp_;
         int resources_;
