@@ -9,9 +9,15 @@ PlayerHpDisplay::PlayerHpDisplay(int x, int y)
     setPosition(ccp(x,y));
     
     CCSize size = boundingBox().size;
+    
     label_ = CCLabelTTF::create("0", "Thonburi", 32 );
     label_->setPosition(ccp(size.width/2, size.height/2));
     addChild(label_);
+}
+
+PlayerHpDisplay::~PlayerHpDisplay()
+{
+    CC_SAFE_RELEASE_NULL(label_);
 }
 
 void PlayerHpDisplay::update(const int player_hp)

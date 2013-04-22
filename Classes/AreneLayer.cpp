@@ -1,5 +1,6 @@
 #include "AreneLayer.h"
 
+#include "game_logic/CardSet.h"
 
 AreneLayer::AreneLayer() : CCLayer()
 {
@@ -19,6 +20,9 @@ AreneLayer::AreneLayer() : CCLayer()
     player_hp_display_.setPosition(ccp(400, 170));
     addChild(&player_hp_display_, 1);
     player_hp_display_.update(player_.getHp());
+    
+    hand_card_display_.setPosition(ccp(400, 700));
+    addChild(&hand_card_display_, 1);
 }
 
 AreneLayer::~AreneLayer()
@@ -49,6 +53,7 @@ void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
     CCLOG("ccTouchEnded");
     player_.decrementHp(1);
     player_hp_display_.update(player_.getHp());
+    hand_card_display_.update(&(CardSet::getInstance().getRandomCard()));
 }
 
 

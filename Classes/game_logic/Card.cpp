@@ -7,3 +7,9 @@ Card::Card(Card_t t, std::string name, int cost, int attk, int def)
     
 }
 
+
+const std::string& Card::getName() const
+{
+    return name_;
+}
+

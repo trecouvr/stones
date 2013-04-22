@@ -8,7 +8,9 @@ class Card
         enum Card_t { MONSTER, EVENT, SURVIVAL };
         Card(Card_t t=MONSTER, std::string name="", int cost=0, 
             int attk=0, int def=0);
-    
+        
+        const std::string& getName() const;
+        
     protected:
         Card_t t_;
         int cost_;

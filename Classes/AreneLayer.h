@@ -6,6 +6,7 @@ USING_NS_CC;
 
 #include "game_logic/Player.h"
 #include "PlayerHpDisplay.h"
+#include "HandCardDisplay.h"
 
 class AreneLayer : public CCLayer
 {
@@ -16,6 +17,8 @@ class AreneLayer : public CCLayer
         PlayerHpDisplay player_hp_display_;
         
         Player player_;
+        
+        HandCardDisplay hand_card_display_;
 
     public:
         AreneLayer();

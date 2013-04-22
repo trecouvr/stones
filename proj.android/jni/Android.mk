@@ -12,8 +12,10 @@ LOCAL_MODULE_FILENAME := libgame
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/AreneLayer.cpp \
+                   ../../Classes/HandCardDisplay.cpp \
                    ../../Classes/PlayerHpDisplay.cpp \
                    ../../Classes/game_logic/Card.cpp \
+                   ../../Classes/game_logic/CardSet.cpp \
                    ../../Classes/game_logic/Deck.cpp \
                    ../../Classes/game_logic/Player.cpp
                    
