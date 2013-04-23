@@ -7,5 +7,6 @@ class Utils
 {
     public:
         static bool touchSprite(const CCTouch* touch, CCSprite* sprite);
+        static CCPoint touchToPoint(CCTouch* touch);
 };
 

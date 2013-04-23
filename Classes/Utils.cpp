@@ -9,3 +9,9 @@ bool Utils::touchSprite(const CCTouch* touch, CCSprite* sprite)
 }
 
 
+CCPoint Utils::touchToPoint(CCTouch* touch)
+{
+    // convert the touch object to a position in our cocos2d space
+    return CCDirector::sharedDirector()->convertToGL(touch->getLocationInView());
+}
+

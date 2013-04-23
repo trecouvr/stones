@@ -23,8 +23,8 @@ class AreneLayer : public CCLayer
     public:
         AreneLayer();
         ~AreneLayer();
-
-        CCPoint touchToPoint(CCTouch* touch);
+        
+        void draw(CCObject* pSender);
 
         void ccTouchesBegan(CCSet* touches, CCEvent* event);
         void ccTouchesMoved(CCSet* touches, CCEvent* event);

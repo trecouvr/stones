@@ -10,6 +10,16 @@ AreneLayer::AreneLayer() : CCLayer()
     CCSize size = CCDirector::sharedDirector()->getWinSize();
     CCLOG("Size = %f %f", size.width, size.height);
     
+    CCMenuItemImage *deckItem = CCMenuItemImage::create(
+                                        "Deck.png",
+                                        "DeckSelected.png",
+                                        this,
+                                        menu_selector(AreneLayer::draw) );
+    deckItem->setPosition(ccp(700, 400));
+    CCMenu* pMenu = CCMenu::create(deckItem, NULL);
+    pMenu->setPosition(CCPointZero);
+    addChild(pMenu, 1);
+    
 
     // create background
     color_layer_ = new CCLayerColor;
@@ -18,7 +28,7 @@ AreneLayer::AreneLayer() : CCLayer()
     
     player_.incrementHp(2000);
     
-    player_hp_display_.setPosition(ccp(400, 170));
+    player_hp_display_.setPosition(ccp(400, 120));
     addChild(&player_hp_display_, 1);
     player_hp_display_.update(player_.getHp());
     
@@ -27,7 +37,7 @@ AreneLayer::AreneLayer() : CCLayer()
         const double angle_rad = angle * M_PI / 180;
         const double dist_from_center = 200;
         const int x = 400 + sin(angle_rad)*dist_from_center;
-        const int y = 170 + cos(angle_rad)*dist_from_center;
+        const int y = 120 + cos(angle_rad)*dist_from_center;
         hand_card_display_[i].setPosition(ccp(x, y));
         hand_card_display_[i].setRotation(angle);
         addChild(&hand_card_display_[i], 1);
@@ -38,11 +48,6 @@ AreneLayer::~AreneLayer()
 {
 }
 
-CCPoint AreneLayer::touchToPoint(CCTouch* touch)
-{
-    // convert the touch object to a position in our cocos2d space
-    return CCDirector::sharedDirector()->convertToGL(touch->getLocationInView());
-}
 
 
 void AreneLayer::ccTouchesBegan(CCSet* touches, CCEvent* event)
@@ -87,6 +92,12 @@ void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
             }
         }
     }
+}
+
+
+void AreneLayer::draw(CCObject* pSender)
+{
+    CCLOG("draw");
 }
 
 
