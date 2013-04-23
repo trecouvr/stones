@@ -1,6 +1,7 @@
 #include "AreneLayer.h"
 
 #include "game_logic/CardSet.h"
+#include "Utils.h"
 
 AreneLayer::AreneLayer() : CCLayer()
 {
@@ -21,8 +22,16 @@ AreneLayer::AreneLayer() : CCLayer()
     addChild(&player_hp_display_, 1);
     player_hp_display_.update(player_.getHp());
     
-    hand_card_display_.setPosition(ccp(400, 700));
-    addChild(&hand_card_display_, 1);
+    for (int i=0; i<5; ++i) {
+        const double angle = -90 + 180 * i / 4;
+        const double angle_rad = angle * M_PI / 180;
+        const double dist_from_center = 200;
+        const int x = 400 + sin(angle_rad)*dist_from_center;
+        const int y = 170 + cos(angle_rad)*dist_from_center;
+        hand_card_display_[i].setPosition(ccp(x, y));
+        hand_card_display_[i].setRotation(angle);
+        addChild(&hand_card_display_[i], 1);
+    }
 }
 
 AreneLayer::~AreneLayer()
@@ -53,7 +62,22 @@ void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
     CCLOG("ccTouchEnded");
     player_.decrementHp(1);
     player_hp_display_.update(player_.getHp());
-    hand_card_display_.update(&(CardSet::getInstance().getRandomCard()));
+    
+    for( CCSetIterator it = touches->begin(); it != touches->end(); ++it)
+    {
+        CCTouch* touch = dynamic_cast<CCTouch*>(*it);
+        if(touch)
+        {
+            for (int i=0; i<5; ++i)
+            {
+                HandCardDisplay& hcd = hand_card_display_[i];
+                if (Utils::touchSprite(touch, &hcd))
+                {
+                    hcd.update(&(CardSet::getInstance().getRandomCard()));
+                }
+            }
+        }
+    }
 }
 
 

@@ -5,6 +5,7 @@ HandCardDisplay::HandCardDisplay(int x, int y, float r)
 {
     initWithFile("Card.png");
     setPosition(ccp(x,y));
+    setRotation(r);
     
     CCSize size = boundingBox().size;
     

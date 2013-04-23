@@ -18,7 +18,7 @@ class AreneLayer : public CCLayer
         
         Player player_;
         
-        HandCardDisplay hand_card_display_;
+        HandCardDisplay hand_card_display_[5];
 
     public:
         AreneLayer();
