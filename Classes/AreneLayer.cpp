@@ -126,7 +126,17 @@ void AreneLayer::onTouchHandCard(int i)
         CCScaleBy::create(0.125f, 0.9f),
         nullptr
     ));
-    lastTouchHand_ = i;
+    if (lastTouchHand_ >= 0)
+    {
+        player_.switchHandCards(lastTouchHand_, i);
+        updateHandDisplays();
+        resetLastTouches();
+    }
+    else
+    {
+        resetLastTouches();
+        lastTouchHand_ = i;
+    }
 }
 
 
@@ -145,7 +155,9 @@ void AreneLayer::onTouchMonsterCard(int i)
         updateMonsterDisplays();
         resetLastTouches();
     }
-    else {
+    else
+    {
+        resetLastTouches();
         lastTouchMonster_ = i;
     }
 }

@@ -51,6 +51,20 @@ void Player::invokeMonsterFromHand(int ihand, int imonster)
 }
 
 
+void Player::switchHandCards(int i, int j)
+{
+    // if the indexes are bad then exit
+    if (i < 0 || i > 4 || j < 0 or j > 4) return;
+    
+    Card*& hi = hand_[i];
+    Card*& hj = hand_[j];
+    Card*  ht = hi;
+    hi = hj;
+    hj = ht;
+}
+    
+
+
 void Player::incrementHp(int v)
 {
     hp_ += v;
