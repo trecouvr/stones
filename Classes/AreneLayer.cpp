@@ -60,20 +60,29 @@ void AreneLayer::ccTouchesMoved(CCSet* touches, CCEvent* event)
 void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
     CCLOG("ccTouchEnded");
-    player_.decrementHp(1);
-    player_hp_display_.update(player_.getHp());
     
     for( CCSetIterator it = touches->begin(); it != touches->end(); ++it)
     {
         CCTouch* touch = dynamic_cast<CCTouch*>(*it);
         if(touch)
         {
+            if (Utils::touchSprite(touch, &player_hp_display_))
+            {
+                player_.decrementHp(1);
+                player_hp_display_.update(player_.getHp());
+            }
+            
             for (int i=0; i<5; ++i)
             {
                 HandCardDisplay& hcd = hand_card_display_[i];
                 if (Utils::touchSprite(touch, &hcd))
                 {
                     hcd.update(&(CardSet::getInstance().getRandomCard()));
+                    hcd.runAction(CCSequence::create(
+                        CCScaleBy::create(0.125f, 1.111f),
+                        CCScaleBy::create(0.125f, 0.9f),
+                        nullptr
+                    ));
                 }
             }
         }
