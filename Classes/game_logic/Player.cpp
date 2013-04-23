@@ -31,6 +31,22 @@ Card* Player::draw()
 }
         
 
+void Player::invokeMonsterFromHand(int ihand, int imonster)
+{
+    // if the indexes are bad then exit
+    if (ihand < 0 || ihand > 4 || imonster < 0 or imonster > 4) return;
+    
+    Card* hand = hand_[ihand];
+    Card* monster = monsters_[imonster];
+    // if the hand position is empty or the monster position is not
+    // empty then exit
+    if (hand == nullptr || monster != nullptr) return;
+    // do the job
+    monster = hand;
+    hand = nullptr;
+}
+
+
 void Player::incrementHp(int v)
 {
     hp_ += v;
@@ -51,6 +67,12 @@ int Player::getHp() const
 const Card* Player::getHandCard(int i) const
 {
     return hand_[i];
+}
+
+
+const Card* Player::getMonsterCard(int i) const
+{
+    return monsters_[i];
 }
 
 

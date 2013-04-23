@@ -26,24 +26,38 @@ AreneLayer::AreneLayer() : CCLayer()
     color_layer_->initWithColor(ccc4(0, 0, 255, 255));
     addChild(color_layer_, 0);
     
+    // init player
     player_.incrementHp(2000);
     Deck* d = new Deck(40);
     player_.setDeck(d);
     
+    // init player display
     player_hp_display_.setPosition(ccp(400, 120));
     addChild(&player_hp_display_, 1);
     player_hp_display_.update(player_.getHp());
     
-    for (int i=0; i<5; ++i) {
+    // init hand displays
+    for (int i=0; i<5; ++i)
+    {
+        HandCardDisplay& hcd = hand_card_displays_[i];
         const double angle = -90 + 180 * i / 4;
         const double angle_rad = angle * M_PI / 180;
         const double dist_from_center = 200;
         const int x = 400 + sin(angle_rad)*dist_from_center;
         const int y = 120 + cos(angle_rad)*dist_from_center;
-        hand_card_display_[i].setPosition(ccp(x, y));
-        hand_card_display_[i].setRotation(angle);
-        addChild(&hand_card_display_[i], 1);
+        hcd.setPosition(ccp(x, y));
+        hcd.setRotation(angle);
+        addChild(&hcd, 1);
     }
+    
+    // init monster displays
+    for (int i=0; i<5; ++i)
+    {
+        MonsterDisplay& mdisplay = monster_displays_[i];
+        mdisplay.setPosition(ccp(100 + 150*i, 550));
+        addChild(&mdisplay, 1);
+    }
+        
 }
 
 AreneLayer::~AreneLayer()
@@ -81,7 +95,7 @@ void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
             
             for (int i=0; i<5; ++i)
             {
-                HandCardDisplay& hcd = hand_card_display_[i];
+                HandCardDisplay& hcd = hand_card_displays_[i];
                 if (Utils::touchSprite(touch, &hcd))
                 {
                     hcd.update(&(CardSet::getInstance().getRandomCard()));
@@ -116,8 +130,16 @@ void AreneLayer::updateHandDisplays()
     for (int i=0; i<5; ++i)
     {
         CCLOG("update hcd %d", i);
-        hand_card_display_[i].update(player_.getHandCard(i));
+        hand_card_displays_[i].update(player_.getHandCard(i));
     }
 }
 
+void AreneLayer::updateMonsterDisplays()
+{
+    for (int i=0; i<5; ++i)
+    {
+        CCLOG("update hcd %d", i);
+        monster_displays_[i].update(player_.getMonsterCard(i));
+    }
+}
 

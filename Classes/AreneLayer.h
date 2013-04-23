@@ -7,6 +7,7 @@ USING_NS_CC;
 #include "game_logic/Player.h"
 #include "PlayerHpDisplay.h"
 #include "HandCardDisplay.h"
+#include "MonsterDisplay.h"
 
 class AreneLayer : public CCLayer
 {
@@ -14,11 +15,12 @@ class AreneLayer : public CCLayer
         /// The background color layer
         CCLayerColor* color_layer_;
         
-        PlayerHpDisplay player_hp_display_;
         
         Player player_;
         
-        HandCardDisplay hand_card_display_[5];
+        PlayerHpDisplay player_hp_display_;
+        HandCardDisplay hand_card_displays_[5];
+        MonsterDisplay   monster_displays_[5];
 
     public:
         AreneLayer();
@@ -26,6 +28,7 @@ class AreneLayer : public CCLayer
         
         void draw(CCObject* pSender);
         void updateHandDisplays();
+        void updateMonsterDisplays();
 
         void ccTouchesBegan(CCSet* touches, CCEvent* event);
         void ccTouchesMoved(CCSet* touches, CCEvent* event);

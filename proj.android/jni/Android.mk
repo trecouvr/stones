@@ -13,6 +13,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/AreneLayer.cpp \
                    ../../Classes/HandCardDisplay.cpp \
+                   ../../Classes/MonsterDisplay.cpp \
                    ../../Classes/PlayerHpDisplay.cpp \
                    ../../Classes/Utils.cpp \
                    ../../Classes/game_logic/Card.cpp \

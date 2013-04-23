@@ -10,11 +10,13 @@ class Player
         ~Player();
         
         Card* draw();
+        void invokeMonsterFromHand(int ihand, int imonster);
         void decrementHp(int v);
         void incrementHp(int v);
         
         int getHp() const;
         const Card* getHandCard(int i) const;
+        const Card* getMonsterCard(int i) const;
         void setDeck(Deck* deck);
         
     protected:
