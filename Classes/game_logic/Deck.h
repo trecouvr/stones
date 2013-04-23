@@ -8,10 +8,13 @@
 class Deck
 {
     public:
-        Deck();
+        Deck(int ncards = 0);
+        Card draw();
+        int size() const;
+        bool empty() const;
     
     protected:
-        std::vector<Card*> cards_;
+        std::vector<Card> cards_;
 };
 
 

@@ -19,7 +19,7 @@ AreneLayer::AreneLayer() : CCLayer()
     CCMenu* pMenu = CCMenu::create(deckItem, NULL);
     pMenu->setPosition(CCPointZero);
     addChild(pMenu, 1);
-    
+
 
     // create background
     color_layer_ = new CCLayerColor;
@@ -27,6 +27,8 @@ AreneLayer::AreneLayer() : CCLayer()
     addChild(color_layer_, 0);
     
     player_.incrementHp(2000);
+    Deck* d = new Deck(40);
+    player_.setDeck(d);
     
     player_hp_display_.setPosition(ccp(400, 120));
     addChild(&player_hp_display_, 1);
@@ -98,6 +100,24 @@ void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
 void AreneLayer::draw(CCObject* pSender)
 {
     CCLOG("draw");
+    
+    CCLOG("draw1");
+    Card* c = player_.draw();
+    CCLOG("draw2");
+    if (c != nullptr)
+    {
+        updateHandDisplays();
+    }
+}
+
+
+void AreneLayer::updateHandDisplays()
+{
+    for (int i=0; i<5; ++i)
+    {
+        CCLOG("update hcd %d", i);
+        hand_card_display_[i].update(player_.getHandCard(i));
+    }
 }
 
 

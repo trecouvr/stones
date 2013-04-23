@@ -6,12 +6,15 @@
 class Player
 {
     public:
-        Player(Deck* deck = 0);
+        Player(Deck* deck = nullptr);
         
+        Card* draw();
         void decrementHp(int v);
         void incrementHp(int v);
         
         int getHp() const;
+        const Card* getHandCard(int i) const;
+        void setDeck(Deck* deck);
         
     protected:
         int hp_;

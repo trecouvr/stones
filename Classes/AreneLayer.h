@@ -25,6 +25,7 @@ class AreneLayer : public CCLayer
         ~AreneLayer();
         
         void draw(CCObject* pSender);
+        void updateHandDisplays();
 
         void ccTouchesBegan(CCSet* touches, CCEvent* event);
         void ccTouchesMoved(CCSet* touches, CCEvent* event);
