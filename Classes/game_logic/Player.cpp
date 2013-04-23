@@ -51,16 +51,21 @@ void Player::invokeMonsterFromHand(int ihand, int imonster)
 }
 
 
-void Player::switchHandCards(int i, int j)
+void Player::swapHandCards(int i, int j)
 {
     // if the indexes are bad then exit
     if (i < 0 || i > 4 || j < 0 or j > 4) return;
-    
-    Card*& hi = hand_[i];
-    Card*& hj = hand_[j];
-    Card*  ht = hi;
-    hi = hj;
-    hj = ht;
+    // do the job
+    std::swap(hand_[i], hand_[j]);
+}
+
+
+void Player::swapMonsterCards(int i, int j)
+{
+    // if the indexes are bad then exit
+    if (i < 0 || i > 4 || j < 0 or j > 4) return;
+    // do the job
+    std::swap(monsters_[i], monsters_[j]);
 }
     
 

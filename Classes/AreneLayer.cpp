@@ -128,7 +128,7 @@ void AreneLayer::onTouchHandCard(int i)
     ));
     if (lastTouchHand_ >= 0)
     {
-        player_.switchHandCards(lastTouchHand_, i);
+        player_.swapHandCards(lastTouchHand_, i);
         updateHandDisplays();
         resetLastTouches();
     }
@@ -152,6 +152,12 @@ void AreneLayer::onTouchMonsterCard(int i)
     {
         player_.invokeMonsterFromHand(lastTouchHand_, i);
         updateHandDisplays();
+        updateMonsterDisplays();
+        resetLastTouches();
+    }
+    else if (lastTouchMonster_ >= 0)
+    {
+        player_.swapMonsterCards(lastTouchMonster_, i);
         updateMonsterDisplays();
         resetLastTouches();
     }

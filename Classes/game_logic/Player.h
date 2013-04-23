@@ -11,7 +11,8 @@ class Player
         
         Card* draw();
         void invokeMonsterFromHand(int ihand, int imonster);
-        void switchHandCards(int i, int j);
+        void swapHandCards(int i, int j);
+        void swapMonsterCards(int i, int j);
         void decrementHp(int v);
         void incrementHp(int v);
         
