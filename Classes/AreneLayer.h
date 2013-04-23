@@ -18,9 +18,12 @@ class AreneLayer : public CCLayer
         
         Player player_;
         
-        PlayerHpDisplay player_hp_display_;
-        HandCardDisplay hand_card_displays_[5];
-        MonsterDisplay   monster_displays_[5];
+        PlayerHpDisplay     player_hp_display_;
+        HandCardDisplay     hand_card_displays_[5];
+        MonsterDisplay      monster_displays_[5];
+        
+        int lastTouchHand_;
+        int lastTouchMonster_;
 
     public:
         AreneLayer();
@@ -29,10 +32,13 @@ class AreneLayer : public CCLayer
         void draw(CCObject* pSender);
         void updateHandDisplays();
         void updateMonsterDisplays();
+        void resetLastTouches();
 
         void ccTouchesBegan(CCSet* touches, CCEvent* event);
         void ccTouchesMoved(CCSet* touches, CCEvent* event);
         void ccTouchesEnded(CCSet* touches, CCEvent* event);
+        void onTouchHandCard(int i);
+        void onTouchMonsterCard(int i);
 };
 
 

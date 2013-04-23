@@ -2,6 +2,10 @@
 
 #include <algorithm>
 
+#include "cocos2d.h"
+USING_NS_CC;
+
+
 Player::Player(Deck* deck)
     : hp_(0), deck_(deck)
 {
@@ -36,8 +40,8 @@ void Player::invokeMonsterFromHand(int ihand, int imonster)
     // if the indexes are bad then exit
     if (ihand < 0 || ihand > 4 || imonster < 0 or imonster > 4) return;
     
-    Card* hand = hand_[ihand];
-    Card* monster = monsters_[imonster];
+    Card*& hand = hand_[ihand];
+    Card*& monster = monsters_[imonster];
     // if the hand position is empty or the monster position is not
     // empty then exit
     if (hand == nullptr || monster != nullptr) return;
