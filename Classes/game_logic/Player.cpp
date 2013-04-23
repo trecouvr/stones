@@ -10,6 +10,13 @@ Player::Player(Deck* deck)
     std::fill(events_or_survivals_, events_or_survivals_+5, nullptr);
 }
 
+Player::~Player()
+{
+    for (Card** it=hand_; it<hand_+5; ++it) if (*it != nullptr) delete it;
+    for (Card** it=monsters_; it<monsters_+5; ++it) if (*it != nullptr) delete it;
+    for (Card** it=events_or_survivals_; it<events_or_survivals_+5; ++it) if (*it != nullptr) delete it;
+}
+
 Card* Player::draw()
 {
     for (Card** hand=hand_; hand<hand_+5; ++hand)

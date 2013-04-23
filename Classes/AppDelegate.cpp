@@ -44,7 +44,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // run the first scene
     CCDirector::sharedDirector()->runWithScene(scene);
-
+    
     return true;
 }
 

@@ -7,6 +7,7 @@ class Player
 {
     public:
         Player(Deck* deck = nullptr);
+        ~Player();
         
         Card* draw();
         void decrementHp(int v);
