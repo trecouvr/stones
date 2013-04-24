@@ -12,7 +12,7 @@ USING_NS_CC;
 class AreneLayer : public CCLayer
 {
     protected:
-        /// The background color layer
+        /// The background of the colored layer
         CCLayerColor* color_layer_;
         
         
