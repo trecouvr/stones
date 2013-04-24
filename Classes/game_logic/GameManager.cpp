@@ -35,9 +35,10 @@ void GameManager::runPlayerTurn(Player* player, const Player* o)
         {
             case START_BATTLE:
                 // launch the battle !
+                // write here a special flow to handle battle phases
             break;
             case END_TURN:
-                // end of turn
+                // end of turn, break the loop
                 play = false;
             break;
             case EMBEDDED:
@@ -53,7 +54,7 @@ void GameManager::runPlayerTurn(Player* player, const Player* o)
     }
 }
 
-bool GameManager::isFinish() const
+bool GameManager::isFinished() const
 {
     return false;
 }
