@@ -5,6 +5,8 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
+#include "Card.h"
+#include "Deck.h"
 
 Player::Player(Deck* deck)
     : hp_(0), deck_(deck)

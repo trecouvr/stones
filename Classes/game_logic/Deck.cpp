@@ -1,5 +1,6 @@
 #include "Deck.h"
 
+#include "Card.h"
 #include "CardSet.h"
 
 Deck::Deck(int ncards)

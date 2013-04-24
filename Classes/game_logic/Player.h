@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Card.h"
-#include "Deck.h"
+class Card;
+class Deck;
 
 class Player
 {

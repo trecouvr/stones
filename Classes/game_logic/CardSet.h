@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
 
-#include "Card.h"
+class Card;
 
 
 typedef std::map<std::string, Card> CardMap;

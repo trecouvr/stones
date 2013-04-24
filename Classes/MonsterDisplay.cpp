@@ -1,5 +1,6 @@
 #include "MonsterDisplay.h"
 
+#include "game_logic/Card.h"
 
 MonsterDisplay::MonsterDisplay(int x, int y, float r)
 {

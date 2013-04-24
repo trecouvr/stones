@@ -2,6 +2,8 @@
 
 #include <stdlib.h>
 
+#include "Card.h"
+
 CardSet *CardSet::instance_ = 0;
 
 CardSet::CardSet()

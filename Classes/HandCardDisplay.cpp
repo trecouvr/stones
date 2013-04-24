@@ -1,5 +1,6 @@
 #include "HandCardDisplay.h"
 
+#include "game_logic/Card.h"
 
 HandCardDisplay::HandCardDisplay(int x, int y, float r)
 {

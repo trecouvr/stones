@@ -1,6 +1,7 @@
 #include "AreneLayer.h"
 
 #include "game_logic/CardSet.h"
+#include "game_logic/Deck.h"
 #include "Utils.h"
 
 AreneLayer::AreneLayer() : CCLayer()

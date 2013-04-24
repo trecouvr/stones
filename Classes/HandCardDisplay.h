@@ -3,7 +3,7 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
-#include "game_logic/Card.h"
+class Card;
 
 class HandCardDisplay : public CCSprite
 {
