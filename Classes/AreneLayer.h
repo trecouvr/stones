@@ -22,18 +22,35 @@ class AreneLayer : public CCLayer
         HandCardDisplay     hand_card_displays_[5];
         MonsterDisplay      monster_displays_[5];
         
+        /// Store the last class:`HandCardDisplay` touched
         int lastTouchHand_;
+        /// Store the last class:`MonsterDisplay` touched
         int lastTouchMonster_;
 
     public:
         AreneLayer();
         ~AreneLayer();
         
+        /**
+         * Action performed when the user clicks on draw button
+         */
         void draw(CCObject* pSender);
+        
+        /**
+         * Update the displays for the player's hand
+         */
         void updateHandDisplays();
+        
+        /**
+         * Update the displays for the player's monsters
+         */
         void updateMonsterDisplays();
+        
+        /**
+         * Reset the pointers to last touched zones
+         */
         void resetLastTouches();
-
+        
         void ccTouchesBegan(CCSet* touches, CCEvent* event);
         void ccTouchesMoved(CCSet* touches, CCEvent* event);
         void ccTouchesEnded(CCSet* touches, CCEvent* event);
