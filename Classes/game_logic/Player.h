@@ -3,11 +3,18 @@
 class Card;
 class Deck;
 
+#include "Action.h"
+
 class Player
 {
     public:
         Player(Deck* deck = nullptr);
         ~Player();
+        
+        /**
+         * shoudl be Overriden
+         */
+        virtual Action_t doAction(const Player& other) = 0;
         
         /**
          * Draw a card

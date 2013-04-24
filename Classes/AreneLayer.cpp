@@ -1,8 +1,21 @@
 #include "AreneLayer.h"
 
+
+
+
 #include "game_logic/CardSet.h"
 #include "game_logic/Deck.h"
 #include "Utils.h"
+
+
+
+void* start_game_manager(void* data)
+{
+    GameManager* m = (GameManager*)data;
+    m->run();
+    pthread_exit(NULL);
+}
+
 
 AreneLayer::AreneLayer() : CCLayer()
 {
@@ -58,18 +71,22 @@ AreneLayer::AreneLayer() : CCLayer()
         mdisplay.setPosition(ccp(100 + 150*i, 550));
         addChild(&mdisplay, 1);
     }
-        
+    
+    game_manager_ = GameManager(&player_, &player_);
+    pthread_create(&game_thread_, NULL, &start_game_manager, &game_manager_);
 }
 
 AreneLayer::~AreneLayer()
 {
+    pthread_kill(game_thread_, 15);
+    void* ret;
+    pthread_join(game_thread_, &ret);
 }
-
-
 
 void AreneLayer::ccTouchesBegan(CCSet* touches, CCEvent* event)
 {
     CCLOG("ccTouchBegan");
+    player_.sendAction(EMBEDDED);
 }
 
 
