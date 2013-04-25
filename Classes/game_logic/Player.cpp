@@ -8,8 +8,8 @@ USING_NS_CC;
 #include "Card.h"
 #include "Deck.h"
 
-Player::Player(Deck* deck)
-    : hp_(0), deck_(deck)
+Player::Player(Deck* deck, int hp)
+    : hp_(hp), deck_(deck)
 {
     std::fill(hand_, hand_+5, nullptr);
     std::fill(monsters_, monsters_+5, nullptr);
@@ -88,6 +88,10 @@ int Player::getHp() const
     return hp_;
 }
 
+void Player::setHp(int hp)
+{
+    hp_ = hp;
+}
 
 const Card* Player::getHandCard(int i) const
 {

@@ -2,37 +2,48 @@
 
 
 #include "Action.h"
-#include "Player.h"
+#include "UserInterface.h"
+#include "Deck.h"
 
-GameManager::GameManager()
+GameManager::GameManager(UserInterface* ui1, UserInterface* ui2)
 {
-    players_[0] = nullptr;
-    players_[1] = nullptr;
-}
-
-GameManager::GameManager(Player* p1, Player* p2)
-{
-    players_[0] = p1;
-    players_[1] = p2;
+    uis_[0] = ui1;
+    uis_[1] = ui2;
+    Deck* d1 = new Deck(40);
+    players_[0] = Player(d1, 2000);
+    Deck* d2 = new Deck(40);
+    players_[1] = Player(d2, 2000);
 }
 
 void GameManager::run()
 {
     while (!isFinished())
     {
-        runPlayerTurn(players_[0], players_[1]);
-        runPlayerTurn(players_[1], players_[0]);
+        runPlayerTurn(uis_[0], players_[0], players_[1]);
+        runPlayerTurn(uis_[1], players_[1], players_[0]);
     }
 }
 
-void GameManager::runPlayerTurn(Player* player, const Player* o)
+void GameManager::runPlayerTurn(UserInterface* ui, Player& p1, Player& o)
 {
     bool play = true;
     while (play)
     {
-        Action_t action = player->doAction(*o);
-        switch (action)
+        Action action = ui->getAction(p1, o);
+        switch (action.t)
         {
+            case DRAW:
+                p1.draw();
+            break;
+            case INVOKE_MONSTER_FROM_HAND:
+                p1.invokeMonsterFromHand(action.data[0], action.data[1]);
+            break;
+            case SWAP_HAND_CARDS:
+                p1.swapHandCards(action.data[0], action.data[1]);
+            break;
+            case SWAP_MONSTER_CARDS:
+                p1.swapMonsterCards(action.data[0], action.data[1]);
+            break;
             case START_BATTLE:
                 // launch the battle !
                 // write here a special flow to handle battle phases
@@ -41,12 +52,6 @@ void GameManager::runPlayerTurn(Player* player, const Player* o)
                 // end of turn, break the loop
                 play = false;
             break;
-            case EMBEDDED:
-                /* do nothing, action does not need manager. Note this 
-                 * is for convenience, doAction should return only 
-                 * START_BATTLE or END_TURN, since this is the only 
-                 * cases manager is involved
-                 */
             default:
                 // by default do nothing, shall we raise an exception ?
             break;

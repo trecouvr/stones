@@ -8,7 +8,7 @@ class Deck;
 class Player
 {
     public:
-        Player(Deck* deck = nullptr);
+        Player(Deck* deck = nullptr, int hp = 0);
         ~Player();
         
         /**
@@ -20,7 +20,7 @@ class Player
          * EMBEDDED in this case, the function will be re-call 
          * immediatly by the manager.
          */
-        virtual Action_t doAction(const Player& other) = 0;
+        //virtual Action_t doAction(const Player& other) = 0;
         
         /**
          * Draw a card
@@ -53,6 +53,7 @@ class Player
         void incrementHp(int v);
         
         int getHp() const;
+        void setHp(int hp);
         const Card* getHandCard(int i) const;
         const Card* getMonsterCard(int i) const;
         void setDeck(Deck* deck);

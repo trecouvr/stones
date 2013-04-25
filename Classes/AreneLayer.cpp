@@ -41,14 +41,13 @@ AreneLayer::AreneLayer() : CCLayer()
     addChild(color_layer_, 0);
     
     // init player
-    player_.incrementHp(2000);
-    Deck* d = new Deck(40);
-    player_.setDeck(d);
+    //player_.incrementHp(2000);
+    //Deck* d = new Deck(40);
+    //player_.setDeck(d);
     
     // init player display
     player_hp_display_.setPosition(ccp(400, 120));
     addChild(&player_hp_display_, 1);
-    player_hp_display_.update(player_.getHp());
     
     // init hand displays
     for (int i=0; i<5; ++i)
@@ -86,7 +85,6 @@ AreneLayer::~AreneLayer()
 void AreneLayer::ccTouchesBegan(CCSet* touches, CCEvent* event)
 {
     CCLOG("ccTouchBegan");
-    player_.sendAction(EMBEDDED);
 }
 
 
@@ -105,11 +103,6 @@ void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
         CCTouch* touch = dynamic_cast<CCTouch*>(*it);
         if(touch)
         {
-            if (Utils::touchSprite(touch, &player_hp_display_))
-            {
-                player_.decrementHp(1);
-                player_hp_display_.update(player_.getHp());
-            }
             // test touch on hand cards
             for (int i=0; i<5; ++i)
             {
@@ -146,7 +139,11 @@ void AreneLayer::onTouchHandCard(int i)
     ));
     if (lastTouchHand_ >= 0)
     {
-        player_.swapHandCards(lastTouchHand_, i);
+        Action a;
+        a.t = SWAP_HAND_CARDS;
+        a.data[0] = lastTouchHand_;
+        a.data[1] = i;
+        player_.sendAction(a);
         updateHandDisplays();
         resetLastTouches();
     }
@@ -166,16 +163,23 @@ void AreneLayer::onTouchMonsterCard(int i)
         CCScaleBy::create(0.125f, 0.9f),
         nullptr
     ));
+    Action a;
     if (lastTouchHand_ >= 0)
     {
-        player_.invokeMonsterFromHand(lastTouchHand_, i);
+        a.t = INVOKE_MONSTER_FROM_HAND;
+        a.data[0] = lastTouchHand_;
+        a.data[1] = i;
+        player_.sendAction(a);
         updateHandDisplays();
         updateMonsterDisplays();
         resetLastTouches();
     }
     else if (lastTouchMonster_ >= 0)
     {
-        player_.swapMonsterCards(lastTouchMonster_, i);
+        a.t = INVOKE_MONSTER_FROM_HAND;
+        a.data[0] = lastTouchMonster_;
+        a.data[1] = i;
+        player_.sendAction(a);
         updateMonsterDisplays();
         resetLastTouches();
     }
@@ -191,31 +195,20 @@ void AreneLayer::draw(CCObject* pSender)
 {
     CCLOG("draw");
     
-    Card* c = player_.draw();
-    if (c != nullptr)
-    {
-        updateHandDisplays();
-    }
+    Action a;
+    a.t = DRAW;
+    player_.sendAction(a);
+    updateHandDisplays();
     resetLastTouches();
 }
 
 
 void AreneLayer::updateHandDisplays()
 {
-    for (int i=0; i<5; ++i)
-    {
-        CCLOG("update hcd %d", i);
-        hand_card_displays_[i].update(player_.getHandCard(i));
-    }
 }
 
 void AreneLayer::updateMonsterDisplays()
 {
-    for (int i=0; i<5; ++i)
-    {
-        CCLOG("update md %d", i);
-        monster_displays_[i].update(player_.getMonsterCard(i));
-    }
 }
 
 

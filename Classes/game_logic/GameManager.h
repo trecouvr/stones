@@ -1,13 +1,14 @@
 #pragma once
 
 
-class Player;
+#include "Player.h"
+
+class UserInterface;
 
 class GameManager
 {
     public:
-        GameManager();
-        GameManager(Player* p1, Player* p2);
+        GameManager(UserInterface* ui1 = nullptr, UserInterface* ui2 = nullptr);
         
         /**
          * Launch the game, calling this function will block the current
@@ -24,10 +25,13 @@ class GameManager
         /**
          * Wrap the turn of a player
          */
-        void runPlayerTurn(Player* p, const Player* o);
+        void runPlayerTurn(UserInterface* ui, Player& p, Player& o);
         
         /// The two players
-        Player* players_[2];
+        Player players_[2];
+        
+        /// The two uis
+        UserInterface* uis_[2];
 };
 
 

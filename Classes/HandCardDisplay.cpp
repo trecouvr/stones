@@ -1,8 +1,10 @@
 #include "HandCardDisplay.h"
 
+#include "game_logic/Player.h"
 #include "game_logic/Card.h"
 
-HandCardDisplay::HandCardDisplay(int x, int y, float r)
+HandCardDisplay::HandCardDisplay(int i, int x, int y, float r)
+    : i_(i), CCSprite(), Display()
 {
     initWithFile("Card.png");
     setPosition(ccp(x,y));
@@ -20,8 +22,9 @@ HandCardDisplay::~HandCardDisplay()
     CC_SAFE_RELEASE_NULL(label_);
 }
 
-void HandCardDisplay::update(const Card* c)
+void HandCardDisplay::update(const Player& p, const Player &o)
 {
+    const Card* c = p.getHandCard(i_);
     if (c == nullptr)
     {
         label_->setString("empty");
@@ -32,3 +35,7 @@ void HandCardDisplay::update(const Card* c)
     }
 }
 
+void HandCardDisplay::setI(int i)
+{
+    i_ = i;
+}

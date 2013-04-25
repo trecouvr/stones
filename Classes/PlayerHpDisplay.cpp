@@ -2,8 +2,11 @@
 
 #include <sstream>
 
+#include "game_logic/Player.h"
+
+
 PlayerHpDisplay::PlayerHpDisplay(int x, int y)
-    : CCSprite()
+    : CCSprite(), Display()
 {
     initWithFile("HpBackground.png");
     setPosition(ccp(x,y));
@@ -20,10 +23,10 @@ PlayerHpDisplay::~PlayerHpDisplay()
     CC_SAFE_RELEASE_NULL(label_);
 }
 
-void PlayerHpDisplay::update(const int player_hp)
+void PlayerHpDisplay::update(const Player& p, const Player& o)
 {
     std::stringstream ss;
-    ss << player_hp;
+    ss << p.getHp();
     label_->setString(ss.str().c_str());
 }
 

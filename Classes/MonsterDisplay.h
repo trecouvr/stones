@@ -3,17 +3,20 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Card;
+#include "Display.h"
 
-class MonsterDisplay : public CCSprite
+class Player;
+
+class MonsterDisplay : public CCSprite, public Display
 {
     public:
-        MonsterDisplay(int x=0, int y=0, float r=0);
+        MonsterDisplay(int i=0, int x=0, int y=0, float r=0);
         ~MonsterDisplay();
-        void update(const Card* c);
+        void update(const Player& p, const Player& o);
     
     protected:
         CCLabelTTF* label_;
+        int i_;
 };
 
 

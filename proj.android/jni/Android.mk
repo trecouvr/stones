@@ -13,6 +13,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/AreneLayer.cpp \
                    ../../Classes/CocoPlayer.cpp \
+                   ../../Classes/Display.cpp \
                    ../../Classes/HandCardDisplay.cpp \
                    ../../Classes/MonsterDisplay.cpp \
                    ../../Classes/PlayerHpDisplay.cpp \
@@ -24,7 +25,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/game_logic/GameManager.cpp \
                    ../../Classes/game_logic/Observable.cpp \
                    ../../Classes/game_logic/Observer.cpp \
-                   ../../Classes/game_logic/Player.cpp
+                   ../../Classes/game_logic/Player.cpp \
+                   ../../Classes/game_logic/UserInterface.cpp
                    
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes                   
 

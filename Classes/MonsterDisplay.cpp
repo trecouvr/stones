@@ -1,8 +1,10 @@
 #include "MonsterDisplay.h"
 
+#include "game_logic/Player.h"
 #include "game_logic/Card.h"
 
-MonsterDisplay::MonsterDisplay(int x, int y, float r)
+MonsterDisplay::MonsterDisplay(int i, int x, int y, float r)
+    : i_(i), CCSprite(), Display()
 {
     initWithFile("MonsterZone.png");
     setPosition(ccp(x,y));
@@ -20,8 +22,9 @@ MonsterDisplay::~MonsterDisplay()
     CC_SAFE_RELEASE_NULL(label_);
 }
 
-void MonsterDisplay::update(const Card* c)
+void MonsterDisplay::update(const Player& p, const Player& o)
 {
+    const Card* c = p.getMonsterCard(i_);
     if (c == nullptr)
     {
         label_->setString("empty");

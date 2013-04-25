@@ -3,12 +3,14 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
-class PlayerHpDisplay : public CCSprite
+#include "Display.h"
+
+class PlayerHpDisplay : public CCSprite, public Display
 {
     public:
         PlayerHpDisplay(int x=0, int y=0);
         ~PlayerHpDisplay();
-        void update(const int player_hp);
+        void update(const Player& p, const Player& o);
     
     protected:
         CCLabelTTF* label_;
