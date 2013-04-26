@@ -1,5 +1,8 @@
-#!/bin/bash
 APPNAME="stones"
+
+# Modifs Julien pour pouvoir compiler
+
+NDK_ROOT="/Developer/SDKs/android-ndk-r8e"
 
 # options
 
