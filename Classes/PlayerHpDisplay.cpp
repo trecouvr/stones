@@ -23,7 +23,7 @@ PlayerHpDisplay::~PlayerHpDisplay()
     CC_SAFE_RELEASE_NULL(label_);
 }
 
-void PlayerHpDisplay::update(const Player& p, const Player& o)
+void PlayerHpDisplay::update(const Action& a, const Player& p, const Player& o)
 {
     std::stringstream ss;
     ss << p.getHp();

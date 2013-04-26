@@ -14,30 +14,72 @@ CocoPlayer::CocoPlayer()
     pthread_cond_init (&cond_, NULL);
 }
 
-Action CocoPlayer::getAction(const Player& p, const Player& other)
+void CocoPlayer::getAction(Action& a, const Player& p, const Player& other)
 {
+    r_action_ = &a;
     pthread_mutex_lock(&mutex_);
     pthread_cond_wait(&cond_, &mutex_);
     CCLOG("doAction");
     pthread_mutex_unlock(&mutex_);
-    return r_action_;
 }
 
-void CocoPlayer::afterAction(const Player& p, const Player& o)
+void CocoPlayer::afterAction(const Action& a, const Player& p, const Player& o)
 {
-    for (std::vector<Display*>::iterator it = displays_.begin();
-        it != displays_.end(); ++it)
-    {
-        (*it)->update(p, o);
-    }
+    CCLOG("afterAction %d", a.getT());
+    pthread_mutex_lock(&mutex_);
+    a_ = new Action(a);
+    p_ = &p;
+    o_ = &o;
+    pthread_mutex_unlock(&mutex_);
 }
 
-void CocoPlayer::sendAction(Action a)
+void CocoPlayer::sendAction()
 {
-    r_action_ = a;
     pthread_mutex_lock(&mutex_);
     pthread_cond_signal(&cond_);
     pthread_mutex_unlock(&mutex_);
 }
+
+Action& CocoPlayer::getAction()
+{
+    return *r_action_;
+}
+
+bool CocoPlayer::startUpdate()
+{
+    if (a_ != nullptr && p_ != nullptr && o_ != nullptr)
+    {
+        pthread_mutex_lock(&mutex_);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void CocoPlayer::endUpdate()
+{
+    delete a_;
+    a_ = nullptr;
+    p_ = o_ = nullptr;
+    pthread_mutex_unlock(&mutex_);
+}
+
+const Action* CocoPlayer::getLastActionUpdate() const
+{
+    return a_;
+}
+
+const Player* CocoPlayer::getLastPlayerUpdate() const
+{
+    return p_;
+}
+
+const Player* CocoPlayer::getLastOtherUpdate() const
+{
+    return o_;
+}
+
 
 

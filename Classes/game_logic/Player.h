@@ -12,17 +12,6 @@ class Player
         ~Player();
         
         /**
-         * Shoudl be Overriden, this will be call by the manager during
-         * the player turn. This function can perform anything, in case
-         * the player wants to launch a battle, the function should 
-         * return START_BATTLE, in case he wants to end his turn, the 
-         * function should return END_TURN. The function can also return 
-         * EMBEDDED in this case, the function will be re-call 
-         * immediatly by the manager.
-         */
-        //virtual Action_t doAction(const Player& other) = 0;
-        
-        /**
          * Draw a card
          */
         Card* draw();

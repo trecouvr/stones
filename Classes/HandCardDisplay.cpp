@@ -22,7 +22,7 @@ HandCardDisplay::~HandCardDisplay()
     CC_SAFE_RELEASE_NULL(label_);
 }
 
-void HandCardDisplay::update(const Player& p, const Player &o)
+void HandCardDisplay::update(const Action& a, const Player& p, const Player &o)
 {
     const Card* c = p.getHandCard(i_);
     if (c == nullptr)
@@ -39,3 +39,4 @@ void HandCardDisplay::setI(int i)
 {
     i_ = i;
 }
+

@@ -58,6 +58,7 @@ AreneLayer::AreneLayer() : CCLayer()
         const double dist_from_center = 200;
         const int x = 400 + sin(angle_rad)*dist_from_center;
         const int y = 120 + cos(angle_rad)*dist_from_center;
+        hcd.setI(i);
         hcd.setPosition(ccp(x, y));
         hcd.setRotation(angle);
         addChild(&hcd, 1);
@@ -67,12 +68,15 @@ AreneLayer::AreneLayer() : CCLayer()
     for (int i=0; i<5; ++i)
     {
         MonsterDisplay& mdisplay = monster_displays_[i];
+        mdisplay.setI(i);
         mdisplay.setPosition(ccp(100 + 150*i, 550));
         addChild(&mdisplay, 1);
     }
     
     game_manager_ = GameManager(&player_, &player_);
     pthread_create(&game_thread_, NULL, &start_game_manager, &game_manager_);
+    
+    this->schedule( schedule_selector(AreneLayer::update), .2 );
 }
 
 AreneLayer::~AreneLayer()
@@ -80,6 +84,30 @@ AreneLayer::~AreneLayer()
     pthread_kill(game_thread_, 15);
     void* ret;
     pthread_join(game_thread_, &ret);
+}
+
+void AreneLayer::update(float t)
+{
+    if (player_.startUpdate())
+    {
+        CCLOG("Update arene");
+        const Action* a = player_.getLastActionUpdate();
+        assert(a != nullptr);
+        const Player* p = player_.getLastPlayerUpdate();
+        assert(p != nullptr);
+        const Player* o = player_.getLastOtherUpdate();
+        assert(o != nullptr);
+        
+        for (int i=0; i<5; ++i)
+        {
+            hand_card_displays_[i].update(*a, *p, *o);
+            monster_displays_[i].update(*a, *p, *o);
+        }
+        
+        player_hp_display_.update(*a, *p, *o);
+        
+        player_.endUpdate();
+    }
 }
 
 void AreneLayer::ccTouchesBegan(CCSet* touches, CCEvent* event)
@@ -90,7 +118,7 @@ void AreneLayer::ccTouchesBegan(CCSet* touches, CCEvent* event)
 
 void AreneLayer::ccTouchesMoved(CCSet* touches, CCEvent* event)
 {
-    CCLOG("ccTouchMoved");
+    //CCLOG("ccTouchMoved");
 }
 
 
@@ -139,12 +167,11 @@ void AreneLayer::onTouchHandCard(int i)
     ));
     if (lastTouchHand_ >= 0)
     {
-        Action a;
-        a.t = SWAP_HAND_CARDS;
-        a.data[0] = lastTouchHand_;
-        a.data[1] = i;
-        player_.sendAction(a);
-        updateHandDisplays();
+        Action& a = player_.getAction();
+        a.setT(Action::SWAP_HAND_CARDS);
+        a.addData(lastTouchHand_);
+        a.addData(i);
+        player_.sendAction();
         resetLastTouches();
     }
     else
@@ -163,24 +190,21 @@ void AreneLayer::onTouchMonsterCard(int i)
         CCScaleBy::create(0.125f, 0.9f),
         nullptr
     ));
-    Action a;
+    Action& a = player_.getAction();
     if (lastTouchHand_ >= 0)
     {
-        a.t = INVOKE_MONSTER_FROM_HAND;
-        a.data[0] = lastTouchHand_;
-        a.data[1] = i;
-        player_.sendAction(a);
-        updateHandDisplays();
-        updateMonsterDisplays();
+        a.setT(Action::INVOKE_MONSTER_FROM_HAND);
+        a.addData(lastTouchHand_);
+        a.addData(i);
+        player_.sendAction();
         resetLastTouches();
     }
     else if (lastTouchMonster_ >= 0)
     {
-        a.t = INVOKE_MONSTER_FROM_HAND;
-        a.data[0] = lastTouchMonster_;
-        a.data[1] = i;
-        player_.sendAction(a);
-        updateMonsterDisplays();
+        a.setT(Action::SWAP_MONSTER_CARDS);
+        a.addData(lastTouchMonster_);
+        a.addData(i);
+        player_.sendAction();
         resetLastTouches();
     }
     else
@@ -195,21 +219,12 @@ void AreneLayer::draw(CCObject* pSender)
 {
     CCLOG("draw");
     
-    Action a;
-    a.t = DRAW;
-    player_.sendAction(a);
-    updateHandDisplays();
+    Action& a = player_.getAction();
+    a.setT(Action::DRAW);
+    player_.sendAction();
     resetLastTouches();
 }
 
-
-void AreneLayer::updateHandDisplays()
-{
-}
-
-void AreneLayer::updateMonsterDisplays()
-{
-}
 
 
 void AreneLayer::resetLastTouches()

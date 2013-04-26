@@ -19,20 +19,12 @@ class AreneLayer : public CCLayer
         AreneLayer();
         ~AreneLayer();
         
+        void update(float dt);
+        
         /**
          * Action performed when the user clicks on draw button
          */
         void draw(CCObject* pSender);
-        
-        /**
-         * Update the displays for the player's hand
-         */
-        void updateHandDisplays();
-        
-        /**
-         * Update the displays for the player's monsters
-         */
-        void updateMonsterDisplays();
         
         /**
          * Reset the pointers to last touched zones

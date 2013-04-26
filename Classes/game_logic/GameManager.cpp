@@ -24,38 +24,41 @@ void GameManager::run()
     }
 }
 
-void GameManager::runPlayerTurn(UserInterface* ui, Player& p1, Player& o)
+void GameManager::runPlayerTurn(UserInterface* ui, Player& p, Player& o)
 {
     bool play = true;
     while (play)
     {
-        Action action = ui->getAction(p1, o);
-        switch (action.t)
+        Action action;
+        ui->getAction(action, p, o);
+        switch (action.getT())
         {
-            case DRAW:
-                p1.draw();
+            case Action::DRAW:
+                p.draw();
             break;
-            case INVOKE_MONSTER_FROM_HAND:
-                p1.invokeMonsterFromHand(action.data[0], action.data[1]);
+            case Action::INVOKE_MONSTER_FROM_HAND:
+                p.invokeMonsterFromHand(action.getData(0), action.getData(1));
             break;
-            case SWAP_HAND_CARDS:
-                p1.swapHandCards(action.data[0], action.data[1]);
+            case Action::SWAP_HAND_CARDS:
+                p.swapHandCards(action.getData(0), action.getData(1));
             break;
-            case SWAP_MONSTER_CARDS:
-                p1.swapMonsterCards(action.data[0], action.data[1]);
+            case Action::SWAP_MONSTER_CARDS:
+                p.swapMonsterCards(action.getData(0), action.getData(1));
             break;
-            case START_BATTLE:
+            case Action::START_BATTLE:
                 // launch the battle !
                 // write here a special flow to handle battle phases
             break;
-            case END_TURN:
+            case Action::END_TURN:
                 // end of turn, break the loop
                 play = false;
             break;
+            case Action::NONE:
             default:
                 // by default do nothing, shall we raise an exception ?
             break;
         }
+        ui->afterAction(action, p, o);
     }
 }
 

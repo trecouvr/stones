@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/MonsterDisplay.cpp \
                    ../../Classes/PlayerHpDisplay.cpp \
                    ../../Classes/Utils.cpp \
+                   ../../Classes/game_logic/Action.cpp \
                    ../../Classes/game_logic/Card.cpp \
                    ../../Classes/game_logic/CardSet.cpp \
                    ../../Classes/game_logic/Deck.cpp \

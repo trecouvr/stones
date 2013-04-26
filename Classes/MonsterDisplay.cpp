@@ -22,7 +22,7 @@ MonsterDisplay::~MonsterDisplay()
     CC_SAFE_RELEASE_NULL(label_);
 }
 
-void MonsterDisplay::update(const Player& p, const Player& o)
+void MonsterDisplay::update(const Action& a, const Player& p, const Player& o)
 {
     const Card* c = p.getMonsterCard(i_);
     if (c == nullptr)
@@ -34,5 +34,11 @@ void MonsterDisplay::update(const Player& p, const Player& o)
         label_->setString(c->getName().c_str());
     }
 }
+
+void MonsterDisplay::setI(int i)
+{
+    i_ = i;
+}
+
 
 

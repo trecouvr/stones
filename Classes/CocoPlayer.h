@@ -5,7 +5,7 @@
 
 #include "game_logic/UserInterface.h"
 
-#include "Display.h"
+class Action;
 
 class CocoPlayer : public UserInterface
 {
@@ -17,23 +17,46 @@ class CocoPlayer : public UserInterface
          * block until meth::`sendAction` is called. This is to let the
          * GUI do the job
          */
-        Action getAction(const Player& p, const Player& o);
+        void getAction(Action& a, const Player& p, const Player& o);
         
-        void afterAction(const Player& p, const Player& o);
+        void afterAction(const Action& a, const Player& p, const Player& o);
         
         /**
          * Unblock the meth::`doAction` and make it return the action 
          * type
          */
-        void sendAction(Action a);
+        void sendAction();
         
-        void addDisplay(Display* d);
-    
+        Action& getAction();
+        
+        /**
+         * Try to start an update.
+         * @return  true    if and update is needed, lock
+         * @return  false   if no update is needed, do nothing
+         */
+        bool startUpdate();
+        /**
+         * Unlock the update lock. Warning : use only in mirror of
+         * startUpdate.
+         */
+        void endUpdate();
+        
+        /**
+         * Get the params needed for update, maybe this has to be
+         * reviewed now...
+         */
+        const Action* getLastActionUpdate() const;
+        const Player* getLastPlayerUpdate() const;
+        const Player* getLastOtherUpdate() const;
+        
     protected:
         pthread_mutex_t mutex_;
         pthread_cond_t  cond_;
-        Action r_action_;
-        std::vector<Display*> displays_;
+        Action* r_action_;
+        
+        const Player* p_;
+        const Player* o_;
+        const Action* a_;
 };
 
 
