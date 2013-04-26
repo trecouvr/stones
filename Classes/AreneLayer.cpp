@@ -135,6 +135,8 @@ void AreneLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
     }
 }
 
+// Tjr le même problème avec nullptr
+
 
 void AreneLayer::onTouchHandCard(int i)
 {
@@ -142,7 +144,7 @@ void AreneLayer::onTouchHandCard(int i)
     hcd.runAction(CCSequence::create(
         CCScaleBy::create(0.125f, 1.111f),
         CCScaleBy::create(0.125f, 0.9f),
-        nullptr
+        0
     ));
     if (lastTouchHand_ >= 0)
     {
@@ -164,7 +166,7 @@ void AreneLayer::onTouchMonsterCard(int i)
     md.runAction(CCSequence::create(
         CCScaleBy::create(0.125f, 1.111f),
         CCScaleBy::create(0.125f, 0.9f),
-        nullptr
+        0
     ));
     if (lastTouchHand_ >= 0)
     {
@@ -192,7 +194,7 @@ void AreneLayer::draw(CCObject* pSender)
     CCLOG("draw");
     
     Card* c = player_.draw();
-    if (c != nullptr)
+    if (c != 0)
     {
         updateHandDisplays();
     }

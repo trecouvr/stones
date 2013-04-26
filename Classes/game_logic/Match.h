@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Player.h"
+
 class Match
 {
     public:
@@ -7,6 +9,6 @@ class Match
     
     protected:
         Player* players_[2];
-}
+};
 
 

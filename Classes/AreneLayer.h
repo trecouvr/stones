@@ -15,21 +15,7 @@ USING_NS_CC;
 
 class AreneLayer : public CCLayer
 {
-    protected:
-        /// The background of the colored layer
-        CCLayerColor* color_layer_;
-        
-        
-        Player player_;
-        
-        PlayerHpDisplay     player_hp_display_;
-        HandCardDisplay     hand_card_displays_[5];
-        MonsterDisplay      monster_displays_[5];
-        
-        int lastTouchHand_;
-        int lastTouchMonster_;
-
-    public:
+       public:
         AreneLayer();
         ~AreneLayer();
         

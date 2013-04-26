@@ -8,7 +8,7 @@ class Deck;
 class Player
 {
     public:
-        Player(Deck* deck = nullptr);
+        Player(Deck* deck = 0);	// nullptr pose problème sur XCODE 4.2.1 et Eclipse
         ~Player();
         
         /**
