@@ -18,7 +18,7 @@ GameManager::GameManager(Player* p1, Player* p2)
 
 void GameManager::run()
 {
-    while (!isFinish())
+    while (!isFinished())
     {
         runPlayerTurn(players_[0], players_[1]);
         runPlayerTurn(players_[1], players_[0]);
