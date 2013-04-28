@@ -1,12 +1,12 @@
 #include "Action.h"
 
 
-Action::Action() : t_(Action::NONE)
+Action::Action() : t_(NONE)	// Previous value : Action::NONE, but strange so I changed.
 {
     
 }
 
-int Action::getT() const
+Action_t Action::getT() const
 {
     return t_;
 }
