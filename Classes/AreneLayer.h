@@ -44,6 +44,13 @@ class AreneLayer : public CCLayer
         void ccTouchesEnded(CCSet* touches, CCEvent* event);
         void onTouchHandCard(int i);
         void onTouchMonsterCard(int i);
+		
+		/**
+		 * Initialize the display of a Player's interface
+		 */
+		
+		void initPlayerInterface (const double offset,const char z_order);
+		
     
     
     protected:
