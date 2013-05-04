@@ -24,6 +24,19 @@ class GameManager
     protected:
         /**
          * Wrap the turn of a player
+         * 
+         *      run = true
+         *      while run:
+         *          ui.getaction(a,p,o)
+         *          switch a:
+         *              ..
+         *              case END_TURN:
+         *                  run = false
+         *              ..
+         *          end switch
+         *          ui.afteraction(a,p,o)
+         *      end while
+         * 
          */
         void runPlayerTurn(UserInterface* ui, Player& p, Player& o);
         
