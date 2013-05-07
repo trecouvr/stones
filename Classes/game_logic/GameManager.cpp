@@ -19,8 +19,7 @@ GameManager::GameManager(UserInterface* ui1, UserInterface* ui2)
     
     int i;
     
-    for (i=0;i < 5;i++)
-        players_[0].draw();
+    for (i=0;i < 5;i++) players_[0].draw();
 }
 
 void GameManager::run()

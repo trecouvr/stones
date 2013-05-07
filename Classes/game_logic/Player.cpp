@@ -151,7 +151,7 @@ int Player::_getCardTabCount(const Card* const* tab) const
     int c = 0;
     for (int i=0; i<5; ++i)
     {
-        c += (tab[i] == nullptr) ? 1 : 0;
+        c += (tab[i] != nullptr) ? 1 : 0;
     }
     return c;
 }
