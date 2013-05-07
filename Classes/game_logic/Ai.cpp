@@ -4,6 +4,9 @@
 #include "Player.h"
 #include "Action.h"
 
+#include "cocos2d.h"
+USING_NS_CC;
+
 Ai::Ai()
 {
     

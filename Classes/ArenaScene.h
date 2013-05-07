@@ -8,10 +8,15 @@
 
 #ifndef Stones_ArenaScene_h
 #define Stones_ArenaScene_h
-#include "AreneLayer.h"
-#include "cocos2d.h" 
+#include "cocos2d.h"
+USING_NS_CC;
+
 #include <pthread.h>
 #include "game_logic/GameManager.h"
+
+
+class LayerCocoPlayer;
+class LayerHumanCocoPlayer;
 
 class ArenaScene: public CCScene  
 {
@@ -19,8 +24,8 @@ protected:
 	// These 3 attributes have to be dynamically allocated or set to nullptr
 
 	CCLayer* background_Layer_; // layer of the background
-	AreneLayer* player_layer_; // Player_1's UI
-	AreneLayer* opponent_layer_; // Opponent's UI (with restricted access for player_1)
+	LayerHumanCocoPlayer* player_layer_; // Player_1's UI
+	LayerCocoPlayer* opponent_layer_; // Opponent's UI (with restricted access for player_1)
 	
 	
 	
@@ -49,23 +54,9 @@ public:
 	
 	// geters
 	
-	
-	// Both pointer and value modification is forbidden
-	const AreneLayer* const getPlayerAreneLayer () const 	
-	{
-		return this->player_layer_;
-	}
-	
-	const AreneLayer* const getOpponentAreneLayer () const
-	{
-		return this->opponent_layer_;
-	}
-	
 	// seters
 	
 	void setBackgroundLayer (CCLayer* const b_layer);
-	void setPlayerAreneLayer (AreneLayer* const A_layer);
-	void setOpponentAreneLayer (AreneLayer* const A_layer);
 	
 	// UTILITARY METHODS
 	
@@ -73,6 +64,8 @@ public:
 	// Process to be launched during initialization
 	
 	virtual bool init ();
+	
+	void update(float t);
 	
 };
 

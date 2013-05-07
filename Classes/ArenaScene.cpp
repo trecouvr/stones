@@ -12,6 +12,11 @@
 #include <pthread.h>
 #include <unistd.h>
 
+#include "CocoPlayerHuman.h"
+#include "CocoPlayerAi.h"
+#include "LayerCocoPlayer.h"
+#include "LayerHumanCocoPlayer.h"
+
 
 void ArenaScene::setBackgroundLayer (CCLayer* const b_layer)
 {
@@ -19,15 +24,6 @@ void ArenaScene::setBackgroundLayer (CCLayer* const b_layer)
 }
 
 
-void ArenaScene::setPlayerAreneLayer (AreneLayer* const A_layer)
-{
-	this->player_layer_ = A_layer;
-}
-
-void ArenaScene::setOpponentAreneLayer (AreneLayer* const A_layer)
-{
-	this->opponent_layer_ = A_layer;
-}
 
 
 // !!!!!!!!!!! hyper ambigu, pourquoi une fonction (dont tu passes l'adresse) et une méthode? //
@@ -55,8 +51,8 @@ void ArenaScene::createArenaScene ()
 	
 	/************* ARENA LAYERS INITIALIZATION **************/
 	
-	this->player_layer_ = new AreneLayer;
-	this->opponent_layer_ = new AreneLayer;
+	player_layer_ = new LayerHumanCocoPlayer();
+	opponent_layer_ = new LayerCocoPlayer();
 	
 	// Adding layers as child of the scene
 	
@@ -105,20 +101,31 @@ bool ArenaScene::init ()
 	
 	
 	/************* PLAYERS' UI INITIALIZATION **************/
+	CocoPlayerHuman* hu = new CocoPlayerHuman();
+	CocoPlayerAi* ai = new CocoPlayerAi();
+	this->player_layer_->initPlayerInterface(hu, 0.0,1); // TODO fix fuite de mémoire
+	this->opponent_layer_->initPlayerInterface(ai, size.height,2);
 	
-	 this->player_layer_->initPlayerInterface(0.0,1);
-	 this->opponent_layer_->initPlayerInterface(size.height,2);
-	 
-	  
+	
 	/*************		GAME LOGIC LAUNCHING   **************/
 	
-	game_manager_ = GameManager(player_layer_->getPlayer (),opponent_layer_->getPlayer());
+	game_manager_ = GameManager(hu, ai);
     pthread_create(&game_thread_, NULL, &start_game_manager, &game_manager_);
 	
-    this->player_layer_->schedule( schedule_selector(AreneLayer::update), .2 );
+    player_layer_->schedule( schedule_selector(ArenaScene::update), .2 );
     
     // Start settings are in the game manager
 	
 	
 	return true;
 }
+
+
+void ArenaScene::update(float t)
+{
+	player_layer_->update(t);
+	opponent_layer_->update(t);
+}
+
+
+

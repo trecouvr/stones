@@ -12,10 +12,13 @@ LOCAL_MODULE_FILENAME := libgame
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/ArenaScene.cpp \
-                   ../../Classes/AreneLayer.cpp \
                    ../../Classes/CocoPlayer.cpp \
+                   ../../Classes/CocoPlayerAi.cpp \
+                   ../../Classes/CocoPlayerHuman.cpp \
                    ../../Classes/Display.cpp \
                    ../../Classes/HandCardDisplay.cpp \
+                   ../../Classes/LayerCocoPlayer.cpp \
+                   ../../Classes/LayerHumanCocoPlayer.cpp \
                    ../../Classes/MonsterDisplay.cpp \
                    ../../Classes/PlayerHpDisplay.cpp \
                    ../../Classes/Utils.cpp \

@@ -1,6 +1,4 @@
 #include "AppDelegate.h"
-#include <iostream>
-#include "AreneLayer.h"
 #include "ArenaScene.h"
 
 
@@ -35,17 +33,6 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setAnimationInterval(1.0 / 60);
     
 	
-	/*********************************
-	
-    // create a generic scene
-    CCScene* scene = CCScene::create();
-    
-    // add the layer
-    AreneLayer* layer = new AreneLayer;
-    scene->addChild(layer, 1);
-    layer->release(); // addChild() retained so we release
-
-	 ********************************/
 	 
 	ArenaScene* scene = new ArenaScene;
 	scene->createArenaScene (); 

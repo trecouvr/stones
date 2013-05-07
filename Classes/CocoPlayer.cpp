@@ -2,26 +2,16 @@
 
 
 
-#include "cocos2d.h"
-USING_NS_CC;
-
 #include "game_logic/Player.h"
+#include "game_logic/Action.h"
 
 CocoPlayer::CocoPlayer()
-    : UserInterface()
+    : a_(nullptr), p_(nullptr), o_(nullptr)
 {
     pthread_mutex_init(&mutex_, NULL);
     pthread_cond_init (&cond_, NULL);
 }
 
-void CocoPlayer::getAction(Action& a, const Player& p, const Player& other, int action_count)
-{
-    r_action_ = &a;
-    pthread_mutex_lock(&mutex_);
-    pthread_cond_wait(&cond_, &mutex_);
-    CCLOG("doAction");
-    pthread_mutex_unlock(&mutex_);
-}
 
 void CocoPlayer::afterAction(const Action& a, const Player& p, const Player& o, int action_count)
 {
@@ -33,17 +23,6 @@ void CocoPlayer::afterAction(const Action& a, const Player& p, const Player& o, 
     pthread_mutex_unlock(&mutex_);
 }
 
-void CocoPlayer::sendAction()
-{
-    pthread_mutex_lock(&mutex_);
-    pthread_cond_signal(&cond_);
-    pthread_mutex_unlock(&mutex_);
-}
-
-Action& CocoPlayer::getAction()
-{
-    return *r_action_;
-}
 
 bool CocoPlayer::startUpdate()
 {

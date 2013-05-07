@@ -3,31 +3,21 @@
 #include <vector>
 #include <pthread.h>
 
-#include "game_logic/UserInterface.h"
+#include "cocos2d.h"
+USING_NS_CC;
+
 
 class Action;
+class Player;
 
-class CocoPlayer : public UserInterface
+class CocoPlayer
 {
     public:
         CocoPlayer();
         
-        /**
-         * This is a proxy function that does not do anything except
-         * block until meth::`sendAction` is called. This is to let the
-         * GUI do the job
-         */
-        void getAction(Action& a, const Player& p, const Player& o, int action_count);
-        
         void afterAction(const Action& a, const Player& p, const Player& o, int action_count);
         
-        /**
-         * Unblock the meth::`doAction` and make it return the action 
-         * type
-         */
-        void sendAction();
         
-        Action& getAction();
         
         /**
          * Try to start an update.
@@ -52,7 +42,6 @@ class CocoPlayer : public UserInterface
     protected:
         pthread_mutex_t mutex_;
         pthread_cond_t  cond_;
-        Action* r_action_;
         
         const Player* p_;
         const Player* o_;

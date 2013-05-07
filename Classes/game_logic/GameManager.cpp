@@ -5,6 +5,7 @@
 #include "UserInterface.h"
 #include "Deck.h"
 
+
 GameManager::GameManager(UserInterface* ui1, UserInterface* ui2)
 {
     uis_[0] = ui1;

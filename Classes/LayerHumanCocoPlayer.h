@@ -1,26 +1,19 @@
 #pragma once
 
-#include <pthread.h>
 
-#include "cocos2d.h"
-USING_NS_CC;
+#include "LayerCocoPlayer.h"
 
-#include "game_logic/GameManager.h"
 
-#include "PlayerHpDisplay.h"
-#include "HandCardDisplay.h"
-#include "MonsterDisplay.h"
+class CocoPlayerHuman;
 
-class UserInterface;
-class CocoPlayer;
-
-class AreneLayer : public CCLayer
+class LayerHumanCocoPlayer : public LayerCocoPlayer
 {
     public:
-        AreneLayer();
-		~AreneLayer() {}
+        LayerHumanCocoPlayer();
+		~LayerHumanCocoPlayer();
         
-        void update(float dt);
+        
+		void initPlayerInterface(CocoPlayerHuman* p, const double offset,const char z_order);
         
         /**
          * Action performed when the user clicks on draw button
@@ -39,31 +32,16 @@ class AreneLayer : public CCLayer
         void ccTouchesEnded(CCSet* touches, CCEvent* event);
         void onTouchHandCard(int i);
         void onTouchMonsterCard(int i);
-    
-		// Set Player's UI (offset = 0), opponent's when offset != 0 
-	
-		void initPlayerInterface(CocoPlayer* p, const double offset,const char z_order);
-		
-		// Accessors
-		
-		// getters
-		
-		UserInterface* getUi();
-		
-
+        
     protected:
-        
-        CocoPlayer* player_;
-        
-        PlayerHpDisplay     player_hp_display_;
-        HandCardDisplay     hand_card_displays_[5];
-        MonsterDisplay      monster_displays_[5];
         
         /// Store the last class:`HandCardDisplay` touched
         int lastTouchHand_;
         /// Store the last class:`MonsterDisplay` touched
         int lastTouchMonster_;
-
+        
+        CocoPlayerHuman* player_;
 };
+
 
 
