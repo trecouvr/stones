@@ -116,14 +116,8 @@ bool ArenaScene::init ()
     pthread_create(&game_thread_, NULL, &start_game_manager, &game_manager_);
 	
     this->player_layer_->schedule( schedule_selector(AreneLayer::update), .2 );
-	
-	
-	/*************		START   SETTINGS     **************/
-	
-    sleep (10);  // Sleeps to ensure that all was launched correctly (has to be changed)
     
-	for (int i = 0;i < 5;i++)   // Draw a complete hand
-		this->player_layer_->draw(nullptr);
+    // Start settings are in the game manager
 	
 	
 	return true;
