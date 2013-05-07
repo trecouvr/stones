@@ -17,7 +17,7 @@ class AreneLayer : public CCLayer
 {
     public:
         AreneLayer();
-        ~AreneLayer();
+		~AreneLayer() {}
         
         void update(float dt);
         
@@ -37,13 +37,19 @@ class AreneLayer : public CCLayer
         void onTouchHandCard(int i);
         void onTouchMonsterCard(int i);
     
-    
+		// Set Player's UI (offset = 0), opponent's when offset != 0 
+	
+		void initPlayerInterface (const double offset,const char z_order);
+		
+		// Accessors
+		
+		// getters
+		
+		CocoPlayer* const getPlayer () {return &(this->player_);}
+		
+
     protected:
         void startGameManager(void*);
-        
-        /// The background color layer
-        CCLayerColor* color_layer_;
-        
         
         CocoPlayer player_;
         
@@ -55,9 +61,7 @@ class AreneLayer : public CCLayer
         int lastTouchHand_;
         /// Store the last class:`MonsterDisplay` touched
         int lastTouchMonster_;
-        
-        pthread_t game_thread_;
-        GameManager game_manager_;
+
 };
 
 

@@ -9,17 +9,17 @@
 
 
 
-void* start_game_manager(void* data)
+/*void* start_game_manager(void* data)
 {
     GameManager* m = (GameManager*)data;
     m->run();
     pthread_exit(NULL);
-}
+}*/
 
 
 AreneLayer::AreneLayer() : CCLayer()
 {
-    setTouchEnabled(true);
+    /*setTouchEnabled(true);
     
     CCSize size = CCDirector::sharedDirector()->getWinSize();
     CCLOG("Size = %f %f", size.width, size.height);
@@ -71,20 +71,82 @@ AreneLayer::AreneLayer() : CCLayer()
         mdisplay.setI(i);
         mdisplay.setPosition(ccp(100 + 150*i, 550));
         addChild(&mdisplay, 1);
-    }
+    }*/
     
-    game_manager_ = GameManager(&player_, &player_);
+    /*game_manager_ = GameManager(&player_, &player_);
     pthread_create(&game_thread_, NULL, &start_game_manager, &game_manager_);
     
-    this->schedule( schedule_selector(AreneLayer::update), .2 );
+    this->schedule( schedule_selector(AreneLayer::update), .2 );*/
 }
 
-AreneLayer::~AreneLayer()
+// UI displaying
+
+
+// O N E   P L A Y E R ' S   I N T E R F A C E 
+
+void AreneLayer::initPlayerInterface (const double offset,const char z_order) // Offset is on y axis
 {
-    pthread_kill(game_thread_, 15);
-    void* ret;
-    pthread_join(game_thread_, &ret);
+	// If the offset is not nul then the opponent's interface is about to be displayed
+	
+	double sign = 1;
+	
+	if (offset > 0)	
+		sign = -1;
+	
+	// Enabling touch events
+	
+	setTouchEnabled(true);
+	
+	// Init Deck
+	
+    CCSize size = CCDirector::sharedDirector()->getWinSize();
+    CCLOG("Size = %f %f", size.width, size.height);
+    
+    CCMenuItemImage *deckItem = CCMenuItemImage::create(
+														"Deck.png",
+														"DeckSelected.png",
+														this,
+														menu_selector(AreneLayer::draw) );
+    deckItem->setPosition(ccp(700,offset + sign * 400));
+    CCMenu* pMenu = CCMenu::create(deckItem, NULL);
+    pMenu->setPosition(CCPointZero); // Previous : (ccp (0,offset)
+    this->addChild(pMenu, z_order);	
+	
+    // init player display
+	
+    player_hp_display_.setPosition(ccp(400, offset + sign * 120));
+    this->addChild(&player_hp_display_, z_order); 
+    
+    // init hand displays
+	
+    for (int i=0; i<5; ++i)
+    {
+        HandCardDisplay& hcd = hand_card_displays_[i];
+        const double angle = sign * (-90) + 180 * i / 4;
+        const double angle_rad = angle * M_PI / 180;
+        const double dist_from_center = 200;
+        const int x = 400 + sin(angle_rad)*dist_from_center;
+        const int y = offset + sign * 120 + cos(angle_rad)*dist_from_center;
+		hcd.setI(i);
+        hcd.setPosition(ccp(x, y));
+        hcd.setRotation(angle);
+        this->addChild(&hcd, z_order); 
+    }
+    
+    // init monster displays
+	
+    for (int i=0; i<5; ++i)
+    {
+        MonsterDisplay& mdisplay = monster_displays_[i];
+		mdisplay.setI(i);
+        mdisplay.setPosition(ccp(100 + 150*i, offset + sign * 550));
+        addChild(&mdisplay, z_order);
+    }
+	
 }
+
+
+// Updating
 
 void AreneLayer::update(float t)
 {

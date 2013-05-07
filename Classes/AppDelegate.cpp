@@ -1,7 +1,7 @@
 #include "AppDelegate.h"
-
+#include <iostream>
 #include "AreneLayer.h"
-
+#include "ArenaScene.h"
 
 
 AppDelegate::AppDelegate()
@@ -34,6 +34,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
     
+	
+	/*********************************
+	
     // create a generic scene
     CCScene* scene = CCScene::create();
     
@@ -41,6 +44,13 @@ bool AppDelegate::applicationDidFinishLaunching()
     AreneLayer* layer = new AreneLayer;
     scene->addChild(layer, 1);
     layer->release(); // addChild() retained so we release
+
+	 ********************************/
+	 
+	ArenaScene* scene = new ArenaScene;
+	scene->createArenaScene (); 
+
+	scene->init();
 
     // run the first scene
     CCDirector::sharedDirector()->runWithScene(scene);
