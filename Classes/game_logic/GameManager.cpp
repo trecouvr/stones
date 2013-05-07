@@ -13,6 +13,13 @@ GameManager::GameManager(UserInterface* ui1, UserInterface* ui2)
     players_[0] = Player(d1, 2000);
     Deck* d2 = new Deck(40);
     players_[1] = Player(d2, 2000);
+    
+    // Drawing 5 cards to initialize player's hand
+    
+    int i;
+    
+    for (i=0;i < 5;i++)
+        players_[0].draw();
 }
 
 void GameManager::run()
