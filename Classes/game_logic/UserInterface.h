@@ -15,19 +15,23 @@ class UserInterface
          * renvoyer une action valide (piocher, poser un monstre, etc...)
          * qui sera exécutée par le GameManager.
          * Note: le retour se fait via la référence sur class:`Action`.
-         * @param   a   la fonction doit modifier cette action
-         * @param   p   le joueur courant
-         * @param   o   la joueur adverse
+         * @param   action          la fonction doit modifier cette action
+         * @param   player          le joueur courant
+         * @param   other           le joueur adverse
+         * @param   action_ccount   le nombre d'actions depuis le début du tour
          */
-        virtual void getAction(Action& a, const Player& p, const Player& o) = 0;
+        virtual void getAction(Action& aaction, const Player& player,
+                            const Player& other, int action_count) = 0;
         
         /**
          * Fonction appellée par la class:`GameManager` après que
          * l'action est été effectuée.
-         * @param   a   l'action qui vient d'être effectuée
-         * @param   p   le joueur courant
-         * @param   o   le joueur adverse
+         * @param   action          l'action qui vient d'être effectuée
+         * @param   player          le joueur courant
+         * @param   other           le joueur adverse
+         * @param   action_ccount   le nombre d'action depuis le début du tour
          */
-        virtual void afterAction(const Action& a, const Player& p, const Player& o) = 0;
+        virtual void afterAction(const Action& action, const Player& player,
+                            const Player& other, int action_count) = 0;
 };
 

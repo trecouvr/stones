@@ -17,9 +17,9 @@ class CocoPlayer : public UserInterface
          * block until meth::`sendAction` is called. This is to let the
          * GUI do the job
          */
-        void getAction(Action& a, const Player& p, const Player& o);
+        void getAction(Action& a, const Player& p, const Player& o, int action_count);
         
-        void afterAction(const Action& a, const Player& p, const Player& o);
+        void afterAction(const Action& a, const Player& p, const Player& o, int action_count);
         
         /**
          * Unblock the meth::`doAction` and make it return the action 

@@ -27,10 +27,11 @@ void GameManager::run()
 void GameManager::runPlayerTurn(UserInterface* ui, Player& p, Player& o)
 {
     bool play = true;
+    int action_count=0;
     while (play)
     {
         Action action;
-        ui->getAction(action, p, o);
+        ui->getAction(action, p, o, action_count);
         switch (action.getT())
         {
             case Action::DRAW:
@@ -58,7 +59,8 @@ void GameManager::runPlayerTurn(UserInterface* ui, Player& p, Player& o)
                 // by default do nothing, shall we raise an exception ?
             break;
         }
-        ui->afterAction(action, p, o);
+        ui->afterAction(action, p, o, action_count);
+        ++action_count;
     }
 }
 

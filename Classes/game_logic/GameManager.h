@@ -27,7 +27,7 @@ class GameManager
          * 
          *      run = true
          *      while run:
-         *          ui.getaction(a,p,o)
+         *          ui.getaction(a,p,o,..)
          *          switch a:
          *              ..
          *              case END_TURN:

@@ -47,6 +47,28 @@ class Player
         const Card* getMonsterCard(int i) const;
         void setDeck(Deck* deck);
         
+        /**
+         * @return  index of the first free emplacement in hand
+         * @return  -1 if no free emplacement
+         */
+        int getFreeHandCardIndex() const;
+        
+        /**
+         * @return  index of the first free emplacement in monster zone
+         * @return  -1 if no free emplacement
+         */
+        int getFreeMonsterCardIndex() const;
+        
+        /**
+         * @return  the number of cards in hand
+         */
+        int getHandCardCount() const;
+        
+        /**
+         * @return  the number of monsters in play (for this player)
+         */
+        int getMonsterCardCount() const;
+        
     protected:
         int hp_;
         int resources_;
@@ -54,5 +76,8 @@ class Player
         Card* hand_[5];
         Card* monsters_[5];
         Card* events_or_survivals_[5];
+        
+        int _getCardTabNullptrIndex(const Card* const* tab) const;
+        int _getCardTabCount(const Card* const* tab) const;
 };
 

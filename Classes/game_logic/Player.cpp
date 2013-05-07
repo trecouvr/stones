@@ -111,6 +111,50 @@ void Player::setDeck(Deck* deck)
 }
 
 
+int Player::getFreeHandCardIndex() const
+{
+    return _getCardTabNullptrIndex(hand_);
+}
+
+
+int Player::getFreeMonsterCardIndex() const
+{
+    return _getCardTabNullptrIndex(monsters_);
+}
+
+
+int Player::getHandCardCount() const
+{
+    _getCardTabCount(hand_);
+}
+
+
+int Player::getMonsterCardCount() const
+{
+    _getCardTabCount(monsters_);
+}
+
+int Player::_getCardTabNullptrIndex(const Card* const* tab) const
+{
+    for (int i=0; i<5; ++i)
+    {
+        if (tab[i] == nullptr)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int Player::_getCardTabCount(const Card* const* tab) const
+{
+    int c = 0;
+    for (int i=0; i<5; ++i)
+    {
+        c += (tab[i] == nullptr) ? 1 : 0;
+    }
+    return c;
+}
 
 
 

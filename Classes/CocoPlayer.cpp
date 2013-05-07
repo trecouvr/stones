@@ -14,7 +14,7 @@ CocoPlayer::CocoPlayer()
     pthread_cond_init (&cond_, NULL);
 }
 
-void CocoPlayer::getAction(Action& a, const Player& p, const Player& other)
+void CocoPlayer::getAction(Action& a, const Player& p, const Player& other, int action_count)
 {
     r_action_ = &a;
     pthread_mutex_lock(&mutex_);
@@ -23,7 +23,7 @@ void CocoPlayer::getAction(Action& a, const Player& p, const Player& other)
     pthread_mutex_unlock(&mutex_);
 }
 
-void CocoPlayer::afterAction(const Action& a, const Player& p, const Player& o)
+void CocoPlayer::afterAction(const Action& a, const Player& p, const Player& o, int action_count)
 {
     CCLOG("afterAction %d", a.getT());
     pthread_mutex_lock(&mutex_);
