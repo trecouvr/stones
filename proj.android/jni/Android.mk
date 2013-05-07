@@ -27,7 +27,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/game_logic/Observable.cpp \
                    ../../Classes/game_logic/Observer.cpp \
                    ../../Classes/game_logic/Player.cpp \
-                   ../../Classes/game_logic/UserInterface.cpp
+                   ../../Classes/game_logic/UserInterface.cpp \
+		   ../../Classes/ArenaScene.cpp
                    
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes                   
 

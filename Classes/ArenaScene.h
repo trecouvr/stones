@@ -11,7 +11,7 @@
 #include "AreneLayer.h"
 #include "cocos2d.h" 
 #include <pthread.h>
-#include "GameManager.h"
+#include "game_logic/GameManager.h"
 
 class ArenaScene: public CCScene  
 {
