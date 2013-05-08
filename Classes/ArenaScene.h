@@ -6,12 +6,14 @@
 //  Copyright (c) 2013 UTC. All rights reserved.
 //
 
-#ifndef Stones_ArenaScene_h
-#define Stones_ArenaScene_h
+#pragma once
+
+#include <pthread.h>
+#include <unistd.h>
+
 #include "cocos2d.h"
 USING_NS_CC;
 
-#include <pthread.h>
 #include "game_logic/GameManager.h"
 
 
@@ -70,5 +72,3 @@ public:
 };
 
 
-
-#endif

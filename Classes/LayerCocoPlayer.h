@@ -2,8 +2,6 @@
 
 #include <pthread.h>
 
-#include "cocos2d.h"
-USING_NS_CC;
 
 #include "game_logic/GameManager.h"
 

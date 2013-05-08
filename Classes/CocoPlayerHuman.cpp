@@ -13,7 +13,6 @@ void CocoPlayerHuman::getAction(Action& a, const Player& p, const Player& other,
     r_action_ = &a;
     pthread_mutex_lock(&mutex_);
     pthread_cond_wait(&cond_, &mutex_);
-    CCLOG("doAction");
     pthread_mutex_unlock(&mutex_);
 }
 

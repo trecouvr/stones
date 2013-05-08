@@ -15,7 +15,7 @@ CocoPlayer::CocoPlayer()
 
 void CocoPlayer::afterAction(const Action& a, const Player& p, const Player& o, int action_count)
 {
-    CCLOG("afterAction %d", a.getT());
+    CCLOG("afterAction %d %d %d", a.getT(), &p, &o);
     pthread_mutex_lock(&mutex_);
     a_ = new Action(a);
     p_ = &p;

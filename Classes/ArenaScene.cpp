@@ -6,11 +6,7 @@
 //  Copyright (c) 2013 UTC. All rights reserved.
 //
 
-#include <iostream>
 #include "ArenaScene.h"
-#include "cocos2d.h"
-#include <pthread.h>
-#include <unistd.h>
 
 #include "CocoPlayerHuman.h"
 #include "CocoPlayerAi.h"
@@ -20,7 +16,7 @@
 
 void ArenaScene::setBackgroundLayer (CCLayer* const b_layer)
 {
-	this->background_Layer_ = b_layer;
+	background_Layer_ = b_layer;
 }
 
 
@@ -43,11 +39,11 @@ void ArenaScene::createArenaScene ()
 	
 	CCLayerColor* lc = new CCLayerColor;
 	lc->initWithColor (ccc4(0,0,255,255));
-	this->background_Layer_ = lc;
+	background_Layer_ = lc;
 	
 	// Adding background as a child of the scene
 	
-	this->addChild(this->background_Layer_,0);
+	addChild(background_Layer_,0);
 	
 	/************* ARENA LAYERS INITIALIZATION **************/
 	
@@ -56,8 +52,8 @@ void ArenaScene::createArenaScene ()
 	
 	// Adding layers as child of the scene
 	
-	this->addChild(this->player_layer_,1);
-	this->addChild(this->opponent_layer_,2);
+	addChild(player_layer_,1);
+	addChild(opponent_layer_,2);
 	  
 }
 
@@ -67,14 +63,14 @@ ArenaScene::~ArenaScene ()
 {	
 	// Destruction of the dynamically allocated objects
 
-	if (this->background_Layer_ != nullptr)
-		delete this->background_Layer_;
+	if (background_Layer_ != nullptr)
+		delete background_Layer_;
 		
-	if (this->player_layer_ != nullptr)
-		delete this->player_layer_;
+	if (player_layer_ != nullptr)
+		delete player_layer_;
 		
-	if (this->opponent_layer_ != nullptr)
-		delete this->opponent_layer_;
+	if (opponent_layer_ != nullptr)
+		delete opponent_layer_;
 		
 	// Thread termination
 	
@@ -89,13 +85,11 @@ bool ArenaScene::init ()
 {
 	// Super Init first
 	
-	if (!this->CCScene::init ())	
+	if (!CCScene::init ())	
 	{
-		std::cerr << std::endl << "CCScene::init error" << std::endl;
 		return false;
 	}
 	
-	std::cerr << std::endl << "In ArenaScene::init method" << std::endl;
 	
 	CCSize size = CCDirector::sharedDirector()->getWinSize();
 	
@@ -103,8 +97,8 @@ bool ArenaScene::init ()
 	/************* PLAYERS' UI INITIALIZATION **************/
 	CocoPlayerHuman* hu = new CocoPlayerHuman();
 	CocoPlayerAi* ai = new CocoPlayerAi();
-	this->player_layer_->initPlayerInterface(hu, 0.0,1); // TODO fix fuite de mémoire
-	this->opponent_layer_->initPlayerInterface(ai, size.height,2);
+	player_layer_->initPlayerInterface(hu, 0.0,1); // TODO fix fuite de mémoire
+	opponent_layer_->initPlayerInterface(ai, size.height,2);
 	
 	
 	/*************		GAME LOGIC LAUNCHING   **************/
@@ -112,7 +106,7 @@ bool ArenaScene::init ()
 	game_manager_ = GameManager(hu, ai);
     pthread_create(&game_thread_, NULL, &start_game_manager, &game_manager_);
 	
-    player_layer_->schedule( schedule_selector(ArenaScene::update), .2 );
+    schedule( schedule_selector(ArenaScene::update), .1 );
     
     // Start settings are in the game manager
 	
