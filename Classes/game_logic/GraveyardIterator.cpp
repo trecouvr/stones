@@ -13,6 +13,18 @@
 
 using namespace std;
 
+GraveyardIterator::GraveyardIterator()
+    : grave_(nullptr), current_element_(nullptr), position_(0)
+{}
+
+GraveyardIterator::GraveyardIterator (Graveyard* const g)
+    : grave_(g), current_element_(nullptr), position_(0)
+{}
+
+GraveyardIterator::~GraveyardIterator()
+{
+}
+
 // Standard operations
 
 Card* GraveyardIterator::first ()

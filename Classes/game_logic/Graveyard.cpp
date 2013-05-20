@@ -9,6 +9,17 @@
 #include "Graveyard.h"
 #include "Card.h"
 
+Graveyard::Graveyard ()
+    : graveyard_(nullptr),nb_cards_(0),it_(new GraveyardIterator(this))
+{}
+
+
+Graveyard::~Graveyard ()
+{
+    if (graveyard_ != nullptr) delete[] graveyard_;
+    //if (it_ != nullptr) delete it_; TODO : why this line crash ?
+};
+
 // Getters
 
 Card* Graveyard::getCard (const int i) const

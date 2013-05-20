@@ -15,15 +15,11 @@ class Card;
 
 class Graveyard
 {
-private:    
-    Card** graveyard_;   // Contains all defeated monster cards
-    unsigned int nb_cards_; // Nb of cards in the array
-    GraveyardIterator* it_;
-
 public:
     // Constructors
     
-    Graveyard ():graveyard_(nullptr),nb_cards_(0),it_(new GraveyardIterator(this)) {}
+    Graveyard();
+    ~Graveyard();
     
     // Accessors
     
@@ -37,9 +33,10 @@ public:
     void addCard (Card& card);
     void rmCard (Card& card);
     
-    // Destructors
-    
-    ~Graveyard () {delete[] graveyard_;delete it_;};
+private:    
+    Card** graveyard_;   // Contains all defeated monster cards
+    unsigned int nb_cards_; // Nb of cards in the array
+    GraveyardIterator* it_;
     
 };
 

@@ -21,8 +21,9 @@ private:
 
     // Private Constructors
     
-    GraveyardIterator() {}
-    GraveyardIterator (Graveyard* const g):grave_(g),current_element_(nullptr),position_(0) {}
+    GraveyardIterator();
+    GraveyardIterator (Graveyard* const g);
+    ~GraveyardIterator();
 
     // Friend classes
     
