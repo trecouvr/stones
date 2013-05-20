@@ -70,7 +70,7 @@ void Graveyard::addCard (Card& card)
 }
 
 
-// Delete a card from the graveyard, dimishes the size of the array
+// Delete a card from the graveyard, diminishes the size of the array
 
 void Graveyard::rmCard (Card& card)
 {

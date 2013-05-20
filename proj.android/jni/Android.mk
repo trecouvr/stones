@@ -12,6 +12,7 @@ LOCAL_MODULE_FILENAME := libgame
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/ArenaScene.cpp \
+		   ../../Classes/game_logic/BattleManager.cpp \
                    ../../Classes/CocoPlayer.cpp \
                    ../../Classes/CocoPlayerAi.cpp \
                    ../../Classes/CocoPlayerHuman.cpp \

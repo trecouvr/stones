@@ -9,8 +9,14 @@ USING_NS_CC;
 #include "Deck.h"
 
 Player::Player(Deck* deck, int hp)
-    : hp_(hp), deck_(deck)
+    : hp_(hp), deck_(deck),monster_in_battle_(nullptr)
 {
+    // Graveyard construction
+    
+    Graveyard graveyard_;
+    
+    // Filling of the hand
+
     std::fill(hand_, hand_+5, nullptr);
     std::fill(monsters_, monsters_+5, nullptr);
     std::fill(events_or_survivals_, events_or_survivals_+5, nullptr);
@@ -155,6 +161,35 @@ int Player::_getCardTabCount(const Card* const* tab) const
     }
     return c;
 }
+
+int Player::addMonsterInBattle (Card& card)
+{
+    if (monster_in_battle_ != nullptr)
+    {
+        monster_in_battle_ = &card;
+        return 0;
+    }
+    else
+        return -1;
+}
+
+int Player::rmMonsterInBattle ()
+{
+    if (monster_in_battle_ != nullptr)
+    {
+        monster_in_battle_ = nullptr;
+        return 0;
+    }
+    else
+        return -1;
+}
+
+
+
+
+
+
+
 
 
 

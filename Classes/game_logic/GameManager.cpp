@@ -4,6 +4,7 @@
 #include "Action.h"
 #include "UserInterface.h"
 #include "Deck.h"
+#include "BattleManager.h"
 
 
 GameManager::GameManager(UserInterface* ui1, UserInterface* ui2)
@@ -14,12 +15,18 @@ GameManager::GameManager(UserInterface* ui1, UserInterface* ui2)
     players_[0] = Player(d1, 2000);
     Deck* d2 = new Deck(40);
     players_[1] = Player(d2, 2000);
+    battle_manager_ = new BattleManager;
     
     // Drawing 5 cards to initialize player's hand
     
     int i;
     
     for (i=0;i < 5;i++) players_[0].draw();
+}
+
+GameManager::~GameManager ()
+{
+    delete battle_manager_;
 }
 
 void GameManager::run()
@@ -55,7 +62,9 @@ void GameManager::runPlayerTurn(UserInterface* ui, Player& p, Player& o)
             break;
             case Action::START_BATTLE:
                 // launch the battle !
-                // write here a special flow to handle battle phases
+                
+                battle_manager_->run(p,o);
+                
             break;
             case Action::END_TURN:
                 // end of turn, break the loop

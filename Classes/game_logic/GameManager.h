@@ -4,11 +4,13 @@
 #include "Player.h"
 
 class UserInterface;
+class BattleManager;
 
 class GameManager
 {
     public:
         GameManager(UserInterface* ui1 = nullptr, UserInterface* ui2 = nullptr);
+        ~GameManager ();
         
         /**
          * Launch the game, calling this function will block the current
@@ -45,6 +47,10 @@ class GameManager
         
         /// The two uis
         UserInterface* uis_[2];
+        
+        // The Battle manager
+        
+        BattleManager* battle_manager_;
 };
 
 

@@ -9,7 +9,9 @@
 #ifndef Stones_BattleManager_h
 #define Stones_BattleManager_h
 
-class Card.h;
+class Card;
+class UserInterface;
+class Player;
 
 class BattleManager
 {
@@ -17,8 +19,15 @@ class BattleManager
     
       
 public:
-    Card& atk (Card& monster1,Card& monster2);  // Returns the winner of the fight
-    void toGraveyard (Card& card,Graveyard& grave); // Sends card to the graveyard
+    void run (Player& p_atk,Player& p_def);
+
+    // Returns the winner of the fight or nullptr in case of equality
+
+    const Card* const atk (const Card& monster1,const Card& monster2);  
+    
+    int atk (const Card& monster,Player& o); // Atks the opponent and returns the remaining HPs
+    
+    void toGraveyard (Card& card,Graveyard& grave); // Sends a card to the graveyard
 
 };
 

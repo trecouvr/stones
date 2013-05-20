@@ -70,6 +70,45 @@ class Player
          */
         int getMonsterCardCount() const;
         
+        /**
+         * @return  0 if the addition is done
+         * @return -1 if monster_in_battle_ is not nullptr
+         */
+
+        int addMonsterInBattle (Card& card);
+        
+        /**
+         * @return  0 if the deletion is done
+         * @return -1 if monster_in_battle_ is equal to nullptr
+         *
+         *  Rk : there's just a nullptr assignment here. There's no use of delete.
+         */
+         
+         int rmMonsterInBattle ();
+         
+        /**
+         *  INLINE
+         *
+         * @return  a pointer to the monster in battle phase
+         * @return  nullptr if no monster is in battle phase
+         */
+        
+        Card* getMonsterInBattle () const 
+        {
+            if (monster_in_battle_ != nullptr)
+                return monster_in_battle_;
+            else
+                return nullptr;
+        }
+        
+        /**
+         *  INLINE
+         *
+         * returns the graveyard attached to the player
+         */
+         
+        Graveyard& getGraveyard() {return graveyard_;}
+        
     protected:
         int hp_;
         int resources_;
@@ -78,6 +117,10 @@ class Player
         Card* monsters_[5];
         Card* events_or_survivals_[5];
         Graveyard graveyard_;
+        
+        // Not nullptr if one Player's monster is in the battle phase; it contains this monster 
+        
+        Card* monster_in_battle_;   
         
         int _getCardTabNullptrIndex(const Card* const* tab) const;
         int _getCardTabCount(const Card* const* tab) const;
