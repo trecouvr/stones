@@ -7,7 +7,7 @@
 //
 
 
-#include "Card.h"
+#include "game_logic/Card.h"
 #include "GeneralOperators.h"
 
 // One can suppose that two cards are the same or not whether the name is the same or not.

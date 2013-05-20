@@ -16,6 +16,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/CocoPlayerAi.cpp \
                    ../../Classes/CocoPlayerHuman.cpp \
                    ../../Classes/Display.cpp \
+                   ../../Classes/GeneralOperators.cpp \
                    ../../Classes/HandCardDisplay.cpp \
                    ../../Classes/LayerCocoPlayer.cpp \
                    ../../Classes/LayerHumanCocoPlayer.cpp \
@@ -29,6 +30,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/game_logic/Deck.cpp \
                    ../../Classes/game_logic/Event.cpp \
                    ../../Classes/game_logic/GameManager.cpp \
+                   ../../Classes/game_logic/Graveyard.cpp \
+                   ../../Classes/game_logic/GraveyardIterator.cpp \
                    ../../Classes/game_logic/Observable.cpp \
                    ../../Classes/game_logic/Observer.cpp \
                    ../../Classes/game_logic/Player.cpp \
