@@ -4,6 +4,7 @@ class Card;
 class Deck;
 
 #include "Action.h"
+#include "Graveyard.h"
 
 class Player
 {
@@ -76,6 +77,7 @@ class Player
         Card* hand_[5];
         Card* monsters_[5];
         Card* events_or_survivals_[5];
+        Graveyard graveyard_;
         
         int _getCardTabNullptrIndex(const Card* const* tab) const;
         int _getCardTabCount(const Card* const* tab) const;
