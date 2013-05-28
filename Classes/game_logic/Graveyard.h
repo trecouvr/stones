@@ -8,7 +8,6 @@
 
 #ifndef Stones_Graveyard_h
 #define Stones_Graveyard_h
-#include "GraveyardIterator.h"
 #include <vector>
 
 using namespace std;

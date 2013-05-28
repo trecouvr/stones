@@ -38,7 +38,7 @@ void BattleManager::run (Player& p_atk,Player& p_def)
                 toGraveyard(*(p_atk.getMonsterInBattle()),p_atk.getGraveyard());
             }
     }
-    else    // If the attacking has no target then it obviously attacks the opponent
+    else    // If the attacker has no target then it obviously attacks the opponent
     {
        int hp = atk (*(p_atk.getMonsterInBattle()),p_def);
        
