@@ -52,8 +52,8 @@ void LayerHumanCocoPlayer::initPlayerInterface(CocoPlayerHuman* p, const double 
     CCMenu* pMenu = CCMenu::create(deckItem, NULL);
     
     CCMenuItemImage *entTurn = CCMenuItemImage::create(
-                                                        "Deck.png",
-                                                        "DeckSelected.png",
+                                                        "EndTurn.png",
+                                                        "EndTurnSelected.png",
                                                         this,
                                                         menu_selector(LayerHumanCocoPlayer::endTurn) );
     entTurn->setPosition(ccp(100,offset + sign * 400));
