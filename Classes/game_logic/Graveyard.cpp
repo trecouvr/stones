@@ -8,17 +8,17 @@
 
 #include "Graveyard.h"
 #include "Card.h"
+#include <vector>
+#include "GeneralOperators.h"
 
 Graveyard::Graveyard ()
-    : graveyard_(nullptr),nb_cards_(0),it_(new GraveyardIterator(this))
+    : graveyard_(vector<Card*>()),nb_cards_(0)
 {}
 
 
 Graveyard::~Graveyard ()
 {
-    if (graveyard_ != nullptr) delete[] graveyard_;
-    //if (it_ != nullptr) delete it_; TODO : why this line crash ?
-};
+}
 
 // Getters
 
@@ -37,90 +37,51 @@ unsigned int Graveyard::getNbCards () const
 
 // Setters
 
-// Add a card in the graveyard : expands the size of the array at each new addition
+// Add a card in the graveyard
 
 void Graveyard::addCard (Card& card)
 {
-    if (graveyard_ == nullptr)
-    {    
-        graveyard_ = new Card*[1];
-        graveyard_[0] = &card;
-        nb_cards_++;
-    }
-    else
-    {    
-        // Recopy the last array in a temp variable
-    
-        Card** temp = new Card*[nb_cards_];
-    
-        for (unsigned int i = 0;i < nb_cards_;i++)
-            temp[i] = graveyard_[i];
-        
-        // Delete graveyard_
-    
-        delete[] graveyard_;
-    
-        // Creation of a new graveyard able to stores all the cards
-    
-        nb_cards_++;
-        graveyard_ = new Card*[nb_cards_];
-    
-        // Recopy of the temp array in the graveyard_
-    
-        for (unsigned int i;i < nb_cards_ - 1;i++)
-            graveyard_[i] = temp[i];
-        
-        // Addition of the new element
-    
-        graveyard_[nb_cards_-1] = &card;
-        
-        // Deletion of the temporary array
-        
-        delete[] temp;
-    }
+   graveyard_.push_back(&card);
 }
 
 
-// Delete a card from the graveyard, diminishes the size of the array
+// Delete a card from the graveyard
 
 void Graveyard::rmCard (Card& card)
 {
-    // searches for the card
+    vector<Card*>::iterator it = graveyard_.begin();
+    vector<Card*>::iterator it_end = graveyard_.end();
     
-    unsigned int pos = this->it_->findCard (card);
     
-    if (pos != -1) // If there's no error
-    {      
-        /* Removes the first occurence of the card "card" at position "pos" */
-                
-        // Copy all the content of the array graveyard_ in a temp array excepted the value at pos "pos"
-                               
-        Card** temp = new Card*[nb_cards_ - 1];
+    // gets the first occurence of the card within the graveyard 
+    
+    while ((*(*it) != card) && (it != it_end))
+        it++;
         
-        for (unsigned int i = 0;i < pos;i++)                                    
-            temp[i] = graveyard_[i];
-                                              
-        if (pos != nb_cards_ - 1)   // If the element is not at the end, then copy the rest
-            for (unsigned int i = pos+1;i < nb_cards_;i++)
-                temp[i-1] = graveyard_[i];
-                                                          
-        // Deletes the graveyard_
+    // Erase the element from the graveyard
     
-        delete[] graveyard_;
-                                                                
-        // Creation of a well dimensioned graveyard_
-                     
-        nb_cards_--;
-        graveyard_ = new Card*[nb_cards_];
-    
-        // Copy of the array temp
-    
-        for (unsigned int i = 0;i < nb_cards_;i++)
-            graveyard_[i] = temp[i];
-                                                                               
-        // Deletion of the temporary array
-    
-        delete[] temp;
-    }
+    graveyard_.erase(it);
 }
+
+//////////////////////////////////////////////////////
+//
+//      Custom features for iterators
+//
+/////////////////////////////////////////////////////
+
+
+unsigned int Graveyard::findCard(Card& card) 
+{
+    vector<Card*>::iterator it = graveyard_.begin();
+    vector<Card*>::iterator it_end = graveyard_.end();
+    
+    
+    // gets the first occurence of the card within the graveyard 
+    
+    while ((*(*it) != card) && (it != it_end))
+        it++;
+        
+    return (*(*it)) == card;
+}
+
 

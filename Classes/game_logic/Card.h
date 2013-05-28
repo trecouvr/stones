@@ -16,6 +16,7 @@ class Card
         int getDef () const {return def_;}
         int getCost () const {return cost_;}
         
+        
     protected:
         Card_t t_;
         int cost_;

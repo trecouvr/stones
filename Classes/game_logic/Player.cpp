@@ -131,13 +131,13 @@ int Player::getFreeMonsterCardIndex() const
 
 int Player::getHandCardCount() const
 {
-    _getCardTabCount(hand_);
+    return _getCardTabCount(hand_);
 }
 
 
 int Player::getMonsterCardCount() const
 {
-    _getCardTabCount(monsters_);
+    return _getCardTabCount(monsters_);
 }
 
 int Player::_getCardTabNullptrIndex(const Card* const* tab) const

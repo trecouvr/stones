@@ -9,7 +9,9 @@
 #ifndef Stones_Graveyard_h
 #define Stones_Graveyard_h
 #include "GraveyardIterator.h"
+#include <vector>
 
+using namespace std;
 
 class Card;
 
@@ -33,10 +35,13 @@ public:
     void addCard (Card& card);
     void rmCard (Card& card);
     
+    // particular methods of iterators
+    
+    unsigned int findCard (Card& card);   // Returns the first occurence of the card "card"
+    
 private:    
-    Card** graveyard_;   // Contains all defeated monster cards
+    vector <Card*> graveyard_; // Contains all defeated monster cards
     unsigned int nb_cards_; // Nb of cards in the array
-    GraveyardIterator* it_;
     
 };
 
