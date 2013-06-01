@@ -92,14 +92,7 @@ class Player
          * @return  a pointer to the monster in battle phase
          * @return  nullptr if no monster is in battle phase
          */
-        
-        Card* getMonsterInBattle () const 
-        {
-            if (monster_in_battle_ != nullptr)
-                return monster_in_battle_;
-            else
-                return nullptr;
-        }
+        Card* getMonsterInBattle () const;
         
         /**
          *  INLINE
@@ -108,6 +101,22 @@ class Player
          */
          
         Graveyard& getGraveyard() {return graveyard_;}
+        
+        int getResRed() const;
+        void setResRed(int);
+        
+        int getResGreen() const;
+        void setResGreen(int);
+        
+        int getResBlue() const;
+        void setResBlue(int);
+        
+        int getResYellow() const;
+        void setResYellow(int);
+        
+        int getRes(int) const;
+        void setRes(int,int);
+        
         
     protected:
         int hp_;
@@ -124,5 +133,7 @@ class Player
         
         int _getCardTabNullptrIndex(const Card* const* tab) const;
         int _getCardTabCount(const Card* const* tab) const;
+        
+        int res_red_, res_green_, res_blue_, res_yellow_;
 };
 

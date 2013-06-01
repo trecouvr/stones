@@ -8,6 +8,7 @@
 #include "PlayerHpDisplay.h"
 #include "HandCardDisplay.h"
 #include "MonsterDisplay.h"
+#include "PlayerResourceDisplay.h"
 
 class UserInterface;
 class CocoPlayer;
@@ -30,6 +31,7 @@ class LayerCocoPlayer : public CCLayer
         PlayerHpDisplay     player_hp_display_;
         HandCardDisplay     hand_card_displays_[5];
         MonsterDisplay      monster_displays_[5];
+	PlayerResourceDisplay resource_displays_[4];
         
         CocoPlayer* player_;
 };

@@ -12,7 +12,6 @@ LOCAL_MODULE_FILENAME := libgame
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/ArenaScene.cpp \
-		   ../../Classes/game_logic/BattleManager.cpp \
                    ../../Classes/CocoPlayer.cpp \
                    ../../Classes/CocoPlayerAi.cpp \
                    ../../Classes/CocoPlayerHuman.cpp \
@@ -23,9 +22,11 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/LayerHumanCocoPlayer.cpp \
                    ../../Classes/MonsterDisplay.cpp \
                    ../../Classes/PlayerHpDisplay.cpp \
+                   ../../Classes/PlayerResourceDisplay.cpp \
                    ../../Classes/Utils.cpp \
                    ../../Classes/game_logic/Ai.cpp \
                    ../../Classes/game_logic/Action.cpp \
+                   ../../Classes/game_logic/BattleManager.cpp \
                    ../../Classes/game_logic/Card.cpp \
                    ../../Classes/game_logic/CardSet.cpp \
                    ../../Classes/game_logic/Deck.cpp \

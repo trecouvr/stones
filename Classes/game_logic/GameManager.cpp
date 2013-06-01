@@ -42,6 +42,14 @@ void GameManager::runPlayerTurn(UserInterface* ui, Player& p, Player& o)
 {
     bool play = true;
     int action_count=0;
+    
+    // increment player resources
+    p.setResRed(p.getResRed()+2);
+    p.setResGreen(p.getResGreen()+2);
+    p.setResBlue(p.getResBlue()+2);
+    p.setResYellow(p.getResYellow()+2);
+    
+    // the player do some actions
     while (play)
     {
         Action action;

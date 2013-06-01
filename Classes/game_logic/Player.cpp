@@ -9,7 +9,8 @@ USING_NS_CC;
 #include "Deck.h"
 
 Player::Player(Deck* deck, int hp)
-    : hp_(hp), deck_(deck),monster_in_battle_(nullptr)
+    : hp_(hp), deck_(deck),monster_in_battle_(nullptr),
+    res_red_(0), res_green_(0), res_blue_(0), res_yellow_(0)
 {
     // Graveyard construction
     
@@ -185,7 +186,73 @@ int Player::rmMonsterInBattle ()
 }
 
 
+Card* Player::getMonsterInBattle() const 
+{
+    return monster_in_battle_;
+}
 
+
+int Player::getResRed() const
+{
+    return res_red_;
+}
+
+void Player::setResRed(int v)
+{
+    res_red_ = v;
+}
+
+int Player::getResGreen() const
+{
+    return res_green_;
+}
+
+void Player::setResGreen(int v)
+{
+    res_green_ = v;
+}
+
+int Player::getResBlue() const
+{
+    return res_blue_;
+}
+
+void Player::setResBlue(int v)
+{
+    res_blue_ = v;
+}
+
+int Player::getResYellow() const
+{
+    return res_yellow_;
+}
+
+void Player::setResYellow(int v)
+{
+    res_yellow_ = v;
+}
+
+int Player::getRes(int r) const
+{
+    switch (r)
+    {
+        case 0: return res_red_; break;
+        case 1: return res_green_; break;
+        case 2: return res_blue_; break;
+        default: return res_yellow_; break;
+    }
+}
+
+void Player::setRes(int r, int v)
+{
+    switch (r)
+    {
+        case 0: res_red_ = v; break;
+        case 1: res_green_ = v; break;
+        case 2: res_blue_ = v; break;
+        default: res_yellow_ = v; break;
+    }
+}
 
 
 

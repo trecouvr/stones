@@ -10,7 +10,6 @@
 #include "Utils.h"
 
 
-
 LayerCocoPlayer::LayerCocoPlayer() : CCLayer(), player_(nullptr)
 {
     
@@ -73,6 +72,16 @@ void LayerCocoPlayer::initPlayerInterface(CocoPlayer* p, const double offset,con
         addChild(&mdisplay, z_order);
     }
     
+    // init resources
+    
+    for (int i=0; i<4; ++i)
+    {
+        PlayerResourceDisplay& rdisplay = resource_displays_[i];
+        rdisplay.setRes(i);
+        rdisplay.setPosition(ccp(750, offset + sign * (i+1) * 50));
+        addChild(&rdisplay, z_order);
+    }
+    
 }
 
 
@@ -94,6 +103,10 @@ void LayerCocoPlayer::update(float t)
         {
             hand_card_displays_[i].update(*a, *p, *o);
             monster_displays_[i].update(*a, *p, *o);
+        }
+        for (int i=0; i<4; ++i)
+        {
+            resource_displays_[i].update(*a, *p, *o);
         }
         
         player_hp_display_.update(*a, *p, *o);
