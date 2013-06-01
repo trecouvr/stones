@@ -8,8 +8,16 @@ CardSet *CardSet::instance_ = 0;
 
 CardSet::CardSet()
 {
-    cards_["baleine-danseuse"] = Card(Card::MONSTER, "baleine-danseuse", 100, 300, 400);
-    //cards_["baba"] = Card(Card::MONSTER, "baba", 100, 150, 200);
+    cards_["Calmar_geant"] = Card(Card::MONSTER, "Calmar_geant", 100, 300, 400);
+    cards_["Baleine_danseuse"] = Card(Card::MONSTER, "Baleine_danseuse", 100, 300, 400);
+    cards_["Grand_pecheur"] = Card(Card::MONSTER, "Grand_pecheur", 100, 300, 400);
+    cards_["Le_roi_dauphin"] = Card(Card::MONSTER, "Le_roi_dauphin", 100, 300, 400);
+    cards_["Octopus"] = Card(Card::MONSTER, "Octopus", 100, 300, 400);
+    cards_["Meduse"] = Card(Card::MONSTER, "Meduse", 100, 300, 400);
+    cards_["Piranhas"] = Card(Card::MONSTER, "Piranhas", 100, 300, 400);
+    cards_["Requin_malin"] = Card(Card::MONSTER, "Requin_malin", 100, 300, 400);
+    cards_["Sirene"] = Card(Card::MONSTER, "Sirene", 100, 300, 400);
+    cards_["Serpent_de_mer"] = Card(Card::MONSTER, "Serpent_de_mer", 100, 300, 400);
 }
 
 CardSet& CardSet::getInstance()
