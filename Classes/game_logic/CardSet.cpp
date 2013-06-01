@@ -8,8 +8,8 @@ CardSet *CardSet::instance_ = 0;
 
 CardSet::CardSet()
 {
-    cards_["bobo"] = Card(Card::MONSTER, "bobo", 100, 150, 200);
-    cards_["baba"] = Card(Card::MONSTER, "baba", 100, 150, 200);
+    cards_["baleine-danseuse"] = Card(Card::MONSTER, "baleine-danseuse", 100, 300, 400);
+    //cards_["baba"] = Card(Card::MONSTER, "baba", 100, 150, 200);
 }
 
 CardSet& CardSet::getInstance()

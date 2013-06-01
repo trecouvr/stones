@@ -14,7 +14,7 @@ MonsterDisplay::MonsterDisplay(int i, int x, int y, float r)
     
     label_ = CCLabelTTF::create("empty", "Thonburi", 32 );
     label_->setPosition(ccp(size.width/2, size.height/2));
-    addChild(label_);
+    //addChild(label_);
 }
 
 MonsterDisplay::~MonsterDisplay()
@@ -27,11 +27,13 @@ void MonsterDisplay::update(const Action& a, const Player& p, const Player& o)
     const Card* c = p.getMonsterCard(i_);
     if (c == nullptr)
     {
-        label_->setString("empty");
+        initWithFile("MonsterZone.png");
+        //label_->setString("empty");
     }
     else
     {
-        label_->setString(c->getName().c_str());
+        initWithFile(("cards/"+c->getName()+".min.png").c_str());
+        //label_->setString(c->getName().c_str());
     }
 }
 
