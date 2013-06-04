@@ -9,9 +9,9 @@
 
 
 
-LayerHumanCocoPlayer::LayerHumanCocoPlayer() : LayerCocoPlayer(), player_(nullptr)
+LayerHumanCocoPlayer::LayerHumanCocoPlayer()
+    : LayerCocoPlayer(), player_(nullptr), inZoom_(false)
 {
-    
 }
 
 LayerHumanCocoPlayer::~LayerHumanCocoPlayer()
@@ -61,6 +61,13 @@ void LayerHumanCocoPlayer::initPlayerInterface(CocoPlayerHuman* p, const double 
     
     pMenu->setPosition(CCPointZero); // Previous : (ccp (0,offset)
     this->addChild(pMenu, z_order);
+    
+    
+    zoom_ = new CCSprite();
+    zoom_->setPosition(ccp(size.width/2, size.height/2));
+    zoom_->setScale(3);
+    this->addChild(zoom_,4);
+    zoom_->setVisible(false);
 }
 
 
@@ -79,6 +86,12 @@ void LayerHumanCocoPlayer::ccTouchesMoved(CCSet* touches, CCEvent* event)
 void LayerHumanCocoPlayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
     CCLOG("ccTouchEnded");
+    
+    if (inZoom_)
+    {
+        zoom_->setVisible(false);
+        inZoom_ = false;
+    }
     
     for( CCSetIterator it = touches->begin(); it != touches->end(); ++it)
     {
@@ -121,12 +134,26 @@ void LayerHumanCocoPlayer::onTouchHandCard(int i)
     ));
     if (lastTouchHand_ >= 0)
     {
-        Action& a = player_->getAction();
-        a.setT(Action::SWAP_HAND_CARDS);
-        a.addData(lastTouchHand_);
-        a.addData(i);
-        player_->sendAction();
-        resetLastTouches();
+        if (lastTouchHand_ == i)
+        {
+            // ZOOM
+            if (!hcd.isEmpty())
+            {
+                zoom_->initWithFile(hcd.getFilePath().c_str());
+                zoom_->setVisible(true);
+                inZoom_ = true;
+                resetLastTouches();
+            }
+        }
+        else
+        {
+            Action& a = player_->getAction();
+            a.setT(Action::SWAP_HAND_CARDS);
+            a.addData(lastTouchHand_);
+            a.addData(i);
+            player_->sendAction();
+            resetLastTouches();
+        }
     }
     else
     {

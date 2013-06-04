@@ -4,7 +4,7 @@
 #include "game_logic/Card.h"
 
 HandCardDisplay::HandCardDisplay(int i, int x, int y, float r)
-    : i_(i), CCSprite(), Display()
+    : i_(i), CCSprite(), Display(), p_(nullptr)
 {
     initWithFile("Card.png");
     setPosition(ccp(x,y));
@@ -25,6 +25,11 @@ HandCardDisplay::~HandCardDisplay()
 
 void HandCardDisplay::update(const Action& a, const Player& p, const Player &o)
 {
+    if (p_ == nullptr)
+    {
+        p_ = &p;
+    }
+    
     const Card* c = p.getHandCard(i_);
     if (c == nullptr)
     {
@@ -36,7 +41,7 @@ void HandCardDisplay::update(const Action& a, const Player& p, const Player &o)
         // TODO afficher le dos de la carte si c'est l'adversaire
         // pour afficher le dos : initWithFile("Card.png"); + setVisible(true);
         //
-        initWithFile((c->getName()+".png").c_str());
+        initWithFile(getFilePath().c_str());
         setVisible(true);
         //label_->setString(c->getName().c_str());
     }
@@ -45,5 +50,28 @@ void HandCardDisplay::update(const Action& a, const Player& p, const Player &o)
 void HandCardDisplay::setI(int i)
 {
     i_ = i;
+}
+
+std::string HandCardDisplay::getFilePath() const
+{
+    if (p_ != nullptr)
+    {
+        const Card* c = p_->getHandCard(i_);
+        if (c != nullptr)
+        {
+            return c->getName()+".png";
+        }
+    }
+    return "";
+}
+
+
+bool HandCardDisplay::isEmpty() const
+{
+    if (p_ != nullptr)
+    {
+        return p_->getHandCard(i_) == nullptr;
+    }
+    return true;
 }
 

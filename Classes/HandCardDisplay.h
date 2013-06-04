@@ -16,9 +16,13 @@ class HandCardDisplay : public CCSprite, public Display
         
         void setI(int i);
         CCLabelTTF* label_;
+        
+        std::string getFilePath() const;
+        bool isEmpty() const;
     
     protected:
         int i_;
+        const Player* p_;
 };
 
 

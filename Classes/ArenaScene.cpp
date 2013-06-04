@@ -52,9 +52,8 @@ void ArenaScene::createArenaScene ()
 	
 	// Adding layers as child of the scene
 	
-	addChild(player_layer_,1);
-	addChild(opponent_layer_,2);
-	  
+	addChild(opponent_layer_,1);
+	addChild(player_layer_,2);
 }
 
 // Destructor

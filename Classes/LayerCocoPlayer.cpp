@@ -114,4 +114,3 @@ void LayerCocoPlayer::update(float t)
         player_->endUpdate();
     }
 }
-

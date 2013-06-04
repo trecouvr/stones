@@ -41,6 +41,9 @@ class LayerHumanCocoPlayer : public LayerCocoPlayer
         int lastTouchMonster_;
         
         CocoPlayerHuman* player_;
+        
+        bool inZoom_;
+        CCSprite* zoom_;
 };
 
 
