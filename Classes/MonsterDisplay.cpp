@@ -32,7 +32,7 @@ void MonsterDisplay::update(const Action& a, const Player& p, const Player& o)
     }
     else
     {
-        initWithFile(("cards/"+c->getName()+".min.png").c_str());
+        initWithFile((c->getName()+".min.png").c_str());
         //label_->setString(c->getName().c_str());
     }
 }
