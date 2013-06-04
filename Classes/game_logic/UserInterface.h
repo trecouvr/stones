@@ -30,8 +30,9 @@ class UserInterface
          * @param   player          le joueur courant
          * @param   other           le joueur adverse
          * @param   action_ccount   le nombre d'action depuis le début du tour
+         * @param   my_turn         est-ce que c'est pendant mon tour ?
          */
         virtual void afterAction(const Action& action, const Player& player,
-                            const Player& other, int action_count) = 0;
+                            const Player& other, int action_count, bool my_turn) = 0;
 };
 

@@ -13,7 +13,7 @@ class LayerHumanCocoPlayer : public LayerCocoPlayer
 		~LayerHumanCocoPlayer();
         
         
-		void initPlayerInterface(CocoPlayerHuman* p, const double offset,const char z_order);
+		void initPlayerInterface(CocoPlayerHuman* p, LayerCocoPlayer* o, const double offset, const char z_order);
         
         /**
          * Action performed when the user clicks on draw button
@@ -32,6 +32,7 @@ class LayerHumanCocoPlayer : public LayerCocoPlayer
         void ccTouchesEnded(CCSet* touches, CCEvent* event);
         void onTouchHandCard(int i);
         void onTouchMonsterCard(int i);
+        void onTouchOtherMonsterCard(int i);
         
     protected:
         
@@ -39,11 +40,14 @@ class LayerHumanCocoPlayer : public LayerCocoPlayer
         int lastTouchHand_;
         /// Store the last class:`MonsterDisplay` touched
         int lastTouchMonster_;
+        int lastTouchOtherMonster_;
         
         CocoPlayerHuman* player_;
         
         bool inZoom_;
         CCSprite* zoom_;
+        
+        LayerCocoPlayer* other_layer_;
 };
 
 

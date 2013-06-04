@@ -36,11 +36,12 @@ class GameManager
          *                  run = false
          *              ..
          *          end switch
-         *          ui.afteraction(a,p,o)
+         *          ui.afteraction(a,p,o,true)
+         *          oui.afteraction(a,p,o,false)
          *      end while
          * 
          */
-        void runPlayerTurn(UserInterface* ui, Player& p, Player& o);
+        void runPlayerTurn(UserInterface* ui, UserInterface* oui, Player& p, Player& o);
         
         /// The two players
         Player players_[2];

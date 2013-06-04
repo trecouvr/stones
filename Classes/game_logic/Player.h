@@ -39,6 +39,11 @@ class Player
          */
         void swapMonsterCards(int i, int j);
         
+        /**
+         * Remove na card from the area
+         */
+        void rmMonsterCard(int i);
+        
         void decrementHp(int v);
         void incrementHp(int v);
         
@@ -53,6 +58,12 @@ class Player
          * @return  -1 if no free emplacement
          */
         int getFreeHandCardIndex() const;
+        
+        /**
+         * @return  index of the first non-free emplacement in hand
+         * @return  -1 if no free emplacement
+         */
+        int getNoFreeHandCardIndex() const;
         
         /**
          * @return  index of the first free emplacement in monster zone

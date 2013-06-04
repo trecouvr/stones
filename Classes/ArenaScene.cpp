@@ -94,10 +94,10 @@ bool ArenaScene::init ()
 	
 	
 	/************* PLAYERS' UI INITIALIZATION **************/
-	CocoPlayerHuman* hu = new CocoPlayerHuman();
-	CocoPlayerAi* ai = new CocoPlayerAi();
-	player_layer_->initPlayerInterface(hu, 0.0,1); // TODO fix fuite de mémoire
+	CocoPlayerHuman* hu = new CocoPlayerHuman(); // TODO delete this
+	CocoPlayerAi* ai = new CocoPlayerAi(); // TODO delete this
 	opponent_layer_->initPlayerInterface(ai, size.height,2);
+	player_layer_->initPlayerInterface(hu, opponent_layer_, 0.0,1);
 	
 	
 	/*************		GAME LOGIC LAUNCHING   **************/

@@ -21,9 +21,20 @@ class LayerCocoPlayer : public CCLayer
         
         void update(float dt);
     
-		// Set Player's UI (offset = 0), opponent's when offset != 0 
+	// Set Player's UI (offset = 0), opponent's when offset != 0 
+	void initPlayerInterface(CocoPlayer* p, const double offset,const char z_order);
 	
-		void initPlayerInterface(CocoPlayer* p, const double offset,const char z_order);
+	/**
+	 * @return -1 if no touch hand card
+	 * @return i index of the hand card if touch
+	 */
+	int touchHandCard(const CCTouch* touch);
+	
+	/**
+	 * @return -1 if no touch monster card
+	 * @return i index of the monster if touch
+	 */
+	int touchMonsterCard(const CCTouch* touch);
 
     protected:
         void startGameManager(void*);

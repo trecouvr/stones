@@ -13,7 +13,7 @@ CocoPlayer::CocoPlayer()
 }
 
 
-void CocoPlayer::afterAction(const Action& a, const Player& p, const Player& o, int action_count)
+void CocoPlayer::afterAction(const Action& a, const Player& p, const Player& o, int action_count, bool my_turn)
 {
     CCLOG("afterAction %d %d %d", a.getT(), &p, &o);
     pthread_mutex_lock(&mutex_);

@@ -12,6 +12,7 @@
 LayerHumanCocoPlayer::LayerHumanCocoPlayer()
     : LayerCocoPlayer(), player_(nullptr), inZoom_(false)
 {
+    resetLastTouches();
 }
 
 LayerHumanCocoPlayer::~LayerHumanCocoPlayer()
@@ -24,9 +25,11 @@ LayerHumanCocoPlayer::~LayerHumanCocoPlayer()
 
 
 // O N E   P L A Y E R ' S   I N T E R F A C E 
-void LayerHumanCocoPlayer::initPlayerInterface(CocoPlayerHuman* p, const double offset,const char z_order) // Offset is on y axis
+void LayerHumanCocoPlayer::initPlayerInterface(CocoPlayerHuman* p, LayerCocoPlayer* o, const double offset,const char z_order) // Offset is on y axis
 {
     LayerCocoPlayer::initPlayerInterface(p, offset, z_order);
+    
+    other_layer_ = o;
     
     player_ = p;
     
@@ -98,25 +101,24 @@ void LayerHumanCocoPlayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
         CCTouch* touch = dynamic_cast<CCTouch*>(*it);
         if(touch)
         {
-            // test touch on hand cards
-            for (int i=0; i<5; ++i)
+            int i;
+            
+            i = touchHandCard(touch);
+            if (i >= 0)
             {
-                HandCardDisplay& hcd = hand_card_displays_[i];
-                if (Utils::touchSprite(touch, &hcd))
-                {
-                    onTouchHandCard(i);
-                    break;
-                }
+                onTouchHandCard(i);
             }
-            // test touch on monster cards
-            for (int i=0; i<5; ++i)
+            
+            i = touchMonsterCard(touch);
+            if (i >= 0)
             {
-                MonsterDisplay& md = monster_displays_[i];
-                if (Utils::touchSprite(touch, &md))
-                {
-                    onTouchMonsterCard(i);
-                    break;
-                }
+                onTouchMonsterCard(i);
+            }
+            
+            i = other_layer_->touchMonsterCard(touch);
+            if (i >= 0)
+            {
+                onTouchOtherMonsterCard(i);
             }
         }
         break; // break to allow only single touch
@@ -195,6 +197,25 @@ void LayerHumanCocoPlayer::onTouchMonsterCard(int i)
     }
 }
 
+void LayerHumanCocoPlayer::onTouchOtherMonsterCard(int i)
+{
+    CCLOG("want a battle ?");
+    Action& a = player_->getAction();
+    if (lastTouchMonster_ >= 0)
+    {
+        a.setT(Action::START_BATTLE);
+        a.addData(lastTouchMonster_);
+        a.addData(i);
+        player_->sendAction();
+        resetLastTouches();
+    }
+    else
+    {
+        resetLastTouches();
+        lastTouchOtherMonster_ = i;
+    }
+}
+
 
 void LayerHumanCocoPlayer::draw(CCObject* pSender)
 {
@@ -222,5 +243,6 @@ void LayerHumanCocoPlayer::resetLastTouches()
 {
     lastTouchHand_      = -1;
     lastTouchMonster_   = -1;
+    lastTouchOtherMonster_ = -1;
 }
 

@@ -9,7 +9,7 @@ class CocoPlayerAi : public Ai, public CocoPlayer
 {
     public:
         CocoPlayerAi();
-        void afterAction(const Action& a, const Player& p, const Player& o, int action_count);
+        void afterAction(const Action& a, const Player& p, const Player& o, int action_count, bool my_turn);
 };
 
 

@@ -114,3 +114,35 @@ void LayerCocoPlayer::update(float t)
         player_->endUpdate();
     }
 }
+
+
+int LayerCocoPlayer::touchHandCard(const CCTouch* touch)
+{
+    // test touch on hand cards
+    for (int i=0; i<5; ++i)
+    {
+        HandCardDisplay& hcd = hand_card_displays_[i];
+        if (Utils::touchSprite(touch, &hcd))
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+int LayerCocoPlayer::touchMonsterCard(const CCTouch* touch)
+{
+    // test touch on monster cards
+    for (int i=0; i<5; ++i)
+    {
+        MonsterDisplay& md = monster_displays_[i];
+        if (Utils::touchSprite(touch, &md))
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+

@@ -25,13 +25,13 @@ void Ai::getAction(Action& a, const Player& p, const Player& o, int action_count
         // et si on a plus de carte
         a.setT(Action::DRAW);
     }
-    else if (p.getHandCardCount() > 0 && i_monster >= 0)
+    else if (action_count < 4 && p.getHandCardCount() > 0 && i_monster >= 0)
     {
         CCLOG("invoke");
         // joueur un monstre si on a au moins une carte en main 
         // et un emplacement libre
         a.setT(Action::INVOKE_MONSTER_FROM_HAND);
-        a.addData(0);
+        a.addData(p.getNoFreeHandCardIndex());
         a.addData(i_monster);
     }
     else
@@ -42,7 +42,7 @@ void Ai::getAction(Action& a, const Player& p, const Player& o, int action_count
     CCLOG("end ia");
 }
 
-void Ai::afterAction(const Action& a, const Player& p, const Player& o, int action_count)
+void Ai::afterAction(const Action& a, const Player& p, const Player& o, int action_count, bool my_turn)
 {
     
 }

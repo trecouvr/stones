@@ -77,7 +77,17 @@ void Player::swapMonsterCards(int i, int j)
     // do the job
     std::swap(monsters_[i], monsters_[j]);
 }
-    
+
+
+void Player::rmMonsterCard(int i)
+{
+    // if the index is bad then exit
+    if (i <0 || i > 4) return;
+    if (monsters_[i] == nullptr) return;
+    // remove the monster from the area
+    delete monsters_[i];
+    monsters_[i] = nullptr;
+}
 
 
 void Player::incrementHp(int v)
@@ -122,6 +132,19 @@ void Player::setDeck(Deck* deck)
 int Player::getFreeHandCardIndex() const
 {
     return _getCardTabNullptrIndex(hand_);
+}
+
+
+int Player::getNoFreeHandCardIndex() const
+{
+    for (int i=0; i<5; ++i)
+    {
+        if (hand_[i] != nullptr)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 
