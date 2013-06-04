@@ -18,7 +18,7 @@ void Ai::getAction(Action& a, const Player& p, const Player& o, int action_count
     int i_hand = p.getFreeHandCardIndex();
     int i_monster = p.getFreeMonsterCardIndex();
     CCLOG("%d %d %d %d", action_count, p.getHandCardCount(), i_hand, i_monster);
-    if (action_count == 0 && p.getHandCardCount() <= 0)
+    if (action_count == 0 && p.getHandCardCount() <= 5)
     {
         CCLOG("piocher");
         // piocher si c'est le début du tour
