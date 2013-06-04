@@ -25,9 +25,9 @@ Player::Player(Deck* deck, int hp)
 
 Player::~Player()
 {
-    for (Card** it=hand_; it<hand_+5; ++it) if (*it != nullptr) delete it;
-    for (Card** it=monsters_; it<monsters_+5; ++it) if (*it != nullptr) delete it;
-    for (Card** it=events_or_survivals_; it<events_or_survivals_+5; ++it) if (*it != nullptr) delete it;
+    for (Card** it=hand_; it<hand_+5; ++it) if (*it != nullptr) delete *it;
+    for (Card** it=monsters_; it<monsters_+5; ++it) if (*it != nullptr) delete *it;
+    for (Card** it=events_or_survivals_; it<events_or_survivals_+5; ++it) if (*it != nullptr) delete *it;
 }
 
 Card* Player::draw()
