@@ -12,9 +12,9 @@ GameManager::GameManager(UserInterface* ui1, UserInterface* ui2)
     uis_[0] = ui1;
     uis_[1] = ui2;
     Deck* d1 = new Deck(100);
-    players_[0] = Player(d1, 2000);
+    players_[0] = Player(d1, 2000,J1);
     Deck* d2 = new Deck(100);
-    players_[1] = Player(d2, 2000);
+    players_[1] = Player(d2, 2000,J2);
     battle_manager_ = new BattleManager;
     
     // Drawing 5 cards to initialize player's hand

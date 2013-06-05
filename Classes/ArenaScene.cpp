@@ -37,9 +37,16 @@ void ArenaScene::createArenaScene ()
 {
 	/************* BACKGROUND INITIALIZATION  **************/
 	
-	CCLayerColor* lc = new CCLayerColor;
+	/*CCLayerColor* lc = new CCLayerColor;
 	lc->initWithColor (ccc4(0,0,255,255));
-	background_Layer_ = lc;
+	background_Layer_ = lc;*/
+    
+    CCLayer* layer = new CCLayer;
+    CCSprite* background = CCSprite::create("fond1.png"); // it's an auto-release object
+    background->setAnchorPoint(ccp(0,0));
+    background->setPosition(ccp(0,0));
+    layer->addChild(background);
+    background_Layer_ = layer;
 	
 	// Adding background as a child of the scene
 	

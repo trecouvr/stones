@@ -38,11 +38,18 @@ void HandCardDisplay::update(const Action& a, const Player& p, const Player &o)
     }
     else
     {
-        // TODO afficher le dos de la carte si c'est l'adversaire
-        // pour afficher le dos : initWithFile("Card.png"); + setVisible(true);
-        //
-        initWithFile(getFilePath().c_str());
-        setVisible(true);
+        // Displays the right side of the cards whether the current player is the first player or not 
+        
+        if (p_->getId() == J1)
+        {
+            initWithFile(getFilePath().c_str());
+            setVisible(true);
+        }
+        else
+        {
+            initWithFile("Card.png");
+            setVisible(true);
+        }
         //label_->setString(c->getName().c_str());
     }
 }

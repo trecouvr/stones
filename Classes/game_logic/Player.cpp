@@ -8,9 +8,9 @@ USING_NS_CC;
 #include "Card.h"
 #include "Deck.h"
 
-Player::Player(Deck* deck, int hp)
+Player::Player(Deck* deck, int hp,id_joueur id_j)
     : hp_(hp), deck_(deck),monster_in_battle_(nullptr),
-    res_red_(0), res_green_(0), res_blue_(0), res_yellow_(0)
+    res_red_(0), res_green_(0), res_blue_(0), res_yellow_(0),id_(id_j)
 {
     // Graveyard construction
     
@@ -278,7 +278,10 @@ void Player::setRes(int r, int v)
     }
 }
 
-
+const id_joueur Player::getId() const
+{
+    return id_;
+}
 
 
 

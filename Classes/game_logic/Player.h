@@ -6,10 +6,12 @@ class Deck;
 #include "Action.h"
 #include "Graveyard.h"
 
+enum id_joueur {J1,J2};
+
 class Player
 {
     public:
-        Player(Deck* deck = nullptr, int hp = 0);
+        Player(Deck* deck = nullptr, int hp = 0,id_joueur id_j=J1);
         ~Player();
         
         /**
@@ -128,8 +130,12 @@ class Player
         int getRes(int) const;
         void setRes(int,int);
         
+        // GetId
+        
+        const id_joueur getId() const; 
         
     protected:
+        id_joueur id_;
         int hp_;
         int resources_;
         Deck* deck_;
