@@ -6,7 +6,7 @@
 MonsterDisplay::MonsterDisplay(int i, int x, int y, float r)
     : i_(i), CCSprite(), Display()
 {
-    initWithFile("MonsterZone.png");
+    initWithFile("Test_zone.png");
     setPosition(ccp(x,y));
     setRotation(r);
     
@@ -27,7 +27,7 @@ void MonsterDisplay::update(const Action& a, const Player& p, const Player& o)
     const Card* c = p.getMonsterCard(i_);
     if (c == nullptr)
     {
-        initWithFile("MonsterZone.png");
+        initWithFile("Test_zone.png");
         //label_->setString("empty");
     }
     else
