@@ -22,5 +22,7 @@ class Utils
          * @param touch point
          */
         static CCPoint touchToPoint(CCTouch* touch);
+        
+        static double distance(CCPoint& a, CCTouch* b);
 };
 

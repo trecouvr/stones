@@ -15,3 +15,9 @@ CCPoint Utils::touchToPoint(CCTouch* touch)
     return CCDirector::sharedDirector()->convertToGL(touch->getLocationInView());
 }
 
+double Utils::distance(CCPoint& pa, CCTouch* b)
+{
+    CCPoint pb = CCDirector::sharedDirector()->convertToGL(b->getLocationInView());
+    return ccpDistance(pa,pb);
+}
+

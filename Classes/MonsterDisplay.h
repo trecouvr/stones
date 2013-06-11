@@ -13,9 +13,13 @@ class MonsterDisplay : public CCSprite, public Display
         
         void setI(int i);
         
+        std::string getFilePath() const;
+        bool isEmpty() const;
+        
     protected:
         CCLabelTTF* label_;
         int i_;
+        const Player* p_;
 };
 
 

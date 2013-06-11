@@ -4,7 +4,7 @@
 #include "game_logic/Card.h"
 
 MonsterDisplay::MonsterDisplay(int i, int x, int y, float r)
-    : i_(i), CCSprite(), Display()
+    : i_(i), CCSprite(), Display(), p_(nullptr)
 {
     initWithFile("Test_zone.png");
     setPosition(ccp(x,y));
@@ -24,6 +24,11 @@ MonsterDisplay::~MonsterDisplay()
 
 void MonsterDisplay::update(const Action& a, const Player& p, const Player& o)
 {
+    if (p_ == nullptr)
+    {
+        p_ = &p;
+    }
+    
     const Card* c = p.getMonsterCard(i_);
     if (c == nullptr)
     {
@@ -42,5 +47,27 @@ void MonsterDisplay::setI(int i)
     i_ = i;
 }
 
+std::string MonsterDisplay::getFilePath() const
+{
+    if (p_ != nullptr)
+    {
+        const Card* c = p_->getMonsterCard(i_);
+        if (c != nullptr)
+        {
+            return c->getName()+".png";
+        }
+    }
+    return "";
+}
+
+
+bool MonsterDisplay::isEmpty() const
+{
+    if (p_ != nullptr)
+    {
+        return p_->getMonsterCard(i_) == nullptr;
+    }
+    return true;
+}
 
 

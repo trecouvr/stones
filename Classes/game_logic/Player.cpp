@@ -113,12 +113,14 @@ void Player::setHp(int hp)
 
 const Card* Player::getHandCard(int i) const
 {
+    if (i <0 || i > 4) return nullptr;
     return hand_[i];
 }
 
 
 const Card* Player::getMonsterCard(int i) const
 {
+    if (i <0 || i > 4) return nullptr;
     return monsters_[i];
 }
 
@@ -151,6 +153,19 @@ int Player::getNoFreeHandCardIndex() const
 int Player::getFreeMonsterCardIndex() const
 {
     return _getCardTabNullptrIndex(monsters_);
+}
+
+
+int Player::getNoFreeMonsterCardIndex() const
+{
+    for (int i=0; i<5; ++i)
+    {
+        if (monsters_[i] != nullptr)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 

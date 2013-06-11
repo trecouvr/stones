@@ -72,6 +72,7 @@ class Player
          * @return  -1 if no free emplacement
          */
         int getFreeMonsterCardIndex() const;
+        int getNoFreeMonsterCardIndex() const;
         
         /**
          * @return  the number of cards in hand

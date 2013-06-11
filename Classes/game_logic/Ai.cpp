@@ -25,6 +25,13 @@ void Ai::getAction(Action& a, const Player& p, const Player& o, int action_count
         // et si on a plus de carte
         a.setT(Action::DRAW);
     }
+    else if (action_count < 2 && p.getNoFreeMonsterCardIndex() >= 0
+        && o.getNoFreeMonsterCardIndex() >= 0)
+    {
+        a.setT(Action::START_BATTLE);
+        a.addData(p.getNoFreeMonsterCardIndex());
+        a.addData(o.getNoFreeMonsterCardIndex());
+    }
     else if (action_count < 4 && p.getHandCardCount() > 0 && i_monster >= 0)
     {
         CCLOG("invoke");
